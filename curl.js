@@ -34,12 +34,12 @@ void main(){
 }`;
 function renderer(){
  if(surface&&!surface.gl.isContextLost())return surface;
- const canvas=document.createElement('canvas'),gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});
+ const canvas=document.createElement('canvas'),gl=canvas.getContext('webgl',{alpha:true,antialias:innerWidth>760,premultipliedAlpha:false});
  if(!gl)return null;
  function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
  const vs=shader(gl.VERTEX_SHADER,vertexSource),fs=shader(gl.FRAGMENT_SHADER,fragmentSource),program=gl.createProgram();
  gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));gl.deleteShader(vs);gl.deleteShader(fs);gl.useProgram(program);
- const cols=128,rows=16,vertices=[],indices=[];
+ const cols=innerWidth<=760?80:128,rows=innerWidth<=760?12:16,vertices=[],indices=[];
  for(let y=0;y<=rows;y++)for(let x=0;x<=cols;x++)vertices.push(x/cols,y/rows);
  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const a=y*(cols+1)+x,b=a+1,c=a+cols+1,d=c+1;indices.push(a,c,b,b,c,d);}
  const vb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);
@@ -55,8 +55,8 @@ export function makeCurl(book,direction,grabY){
  const width=parseFloat(old.style.width),height=parseFloat(old.style.height),rect=old.getBoundingClientRect();
  const anchor=Number.isFinite(grabY)?Math.max(0,Math.min(1,(grabY-rect.top)/rect.height)):.5;
  let gpu;try{gpu=renderer()}catch(e){console.warn('Continuous page fallback:',e.message)}
- const canvas=gpu?.canvas||document.createElement('canvas'),margin=width,padding=80,ratio=Math.min(devicePixelRatio||1,1.5);
- canvas.className='curl-sheet';canvas.width=Math.ceil((width+2*margin)*ratio);canvas.height=Math.ceil((height+2*padding)*ratio);
+ const canvas=gpu?.canvas||document.createElement('canvas'),margin=width,padding=80,ratio=Math.min(devicePixelRatio||1,innerWidth<=760?1:1.5);
+ canvas.className='curl-sheet';const pixelWidth=Math.ceil((width+2*margin)*ratio),pixelHeight=Math.ceil((height+2*padding)*ratio);if(canvas.width!==pixelWidth)canvas.width=pixelWidth;if(canvas.height!==pixelHeight)canvas.height=pixelHeight;
  canvas.style.cssText=`position:absolute;width:${width+2*margin}px;height:${height+2*padding}px;top:${-padding}px;opacity:1`;
  const left=direction>0&&leaves.length>1?parseFloat(leaves[0].style.width):0;canvas.style.left=left-margin+'px';
  if(gpu){const{gl}=gpu;gl.bindTexture(gl.TEXTURE_2D,gpu.texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,old);}
@@ -85,7 +85,9 @@ export function paintCurl(sheet,progress){
  }
 }
 export function finishCurl(sheet,target,onTurn){
- if(sheet.animation)cancelAnimationFrame(sheet.animation);
+ if(sheet.animation)cancelAnimationFrame(sheet.animation);if(sheet.gestureFrame){cancelAnimationFrame(sheet.gestureFrame);sheet.gestureFrame=0;}
  const from=sheet.progress,start=performance.now(),duration=Math.max(140,Math.abs(target-from)*560);let sounded=false;
  return new Promise(resolve=>{function frame(now){const t=Math.min(1,(now-start)/duration),ease=t*t*(3-2*t),p=from+(target-from)*ease;paintCurl(sheet,p);if(target===1&&!sounded&&p>=.52){sounded=true;onTurn?.()}if(t<1)sheet.animation=requestAnimationFrame(frame);else{sheet.canvas.remove();resolve()}}sheet.animation=requestAnimationFrame(frame)});
 }
+
+export function prepareCurl(){try{renderer()}catch{}}

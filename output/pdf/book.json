@@ -1,0 +1,1789 @@
+{
+  "version": 1,
+  "title": "JAVA тілінде объектіге-бағытталған бағдарламалау",
+  "pdf": "./output/pdf/java-reader.pdf",
+  "pages": [
+    {
+      "page": 1,
+      "sourcePage": 1,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 2,
+      "sourcePage": 2,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 3,
+      "sourcePage": 3,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 4,
+      "sourcePage": 4,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 5,
+      "sourcePage": 4,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 6,
+      "sourcePage": 5,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 7,
+      "sourcePage": 5,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 8,
+      "sourcePage": 6,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 9,
+      "sourcePage": 6,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 10,
+      "sourcePage": 7,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 11,
+      "sourcePage": 7,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 12,
+      "sourcePage": 8,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 13,
+      "sourcePage": 8,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 14,
+      "sourcePage": 9,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 15,
+      "sourcePage": 9,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 16,
+      "sourcePage": 10,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 17,
+      "sourcePage": 10,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 18,
+      "sourcePage": 11,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 19,
+      "sourcePage": 11,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 20,
+      "sourcePage": 12,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 21,
+      "sourcePage": 12,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 22,
+      "sourcePage": 13,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 23,
+      "sourcePage": 13,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 24,
+      "sourcePage": 14,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 25,
+      "sourcePage": 14,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 26,
+      "sourcePage": 15,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 27,
+      "sourcePage": 15,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 28,
+      "sourcePage": 16,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 29,
+      "sourcePage": 16,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 30,
+      "sourcePage": 17,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 31,
+      "sourcePage": 18,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 32,
+      "sourcePage": 18,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 33,
+      "sourcePage": 19,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 34,
+      "sourcePage": 19,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 35,
+      "sourcePage": 20,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 36,
+      "sourcePage": 20,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 37,
+      "sourcePage": 21,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 38,
+      "sourcePage": 21,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 39,
+      "sourcePage": 22,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 40,
+      "sourcePage": 22,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 41,
+      "sourcePage": 23,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 42,
+      "sourcePage": 23,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 43,
+      "sourcePage": 24,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 44,
+      "sourcePage": 24,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 45,
+      "sourcePage": 25,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 46,
+      "sourcePage": 25,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 47,
+      "sourcePage": 26,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 48,
+      "sourcePage": 26,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 49,
+      "sourcePage": 27,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 50,
+      "sourcePage": 27,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 51,
+      "sourcePage": 28,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 52,
+      "sourcePage": 28,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 53,
+      "sourcePage": 29,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 54,
+      "sourcePage": 29,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 55,
+      "sourcePage": 30,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 56,
+      "sourcePage": 30,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 57,
+      "sourcePage": 31,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 58,
+      "sourcePage": 31,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 59,
+      "sourcePage": 32,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 60,
+      "sourcePage": 32,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 61,
+      "sourcePage": 33,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 62,
+      "sourcePage": 33,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 63,
+      "sourcePage": 34,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 64,
+      "sourcePage": 34,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 65,
+      "sourcePage": 35,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 66,
+      "sourcePage": 35,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 67,
+      "sourcePage": 36,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 68,
+      "sourcePage": 36,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 69,
+      "sourcePage": 37,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 70,
+      "sourcePage": 37,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 71,
+      "sourcePage": 38,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 72,
+      "sourcePage": 38,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 73,
+      "sourcePage": 39,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 74,
+      "sourcePage": 39,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 75,
+      "sourcePage": 40,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 76,
+      "sourcePage": 40,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 77,
+      "sourcePage": 41,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 78,
+      "sourcePage": 41,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 79,
+      "sourcePage": 42,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 80,
+      "sourcePage": 42,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 81,
+      "sourcePage": 43,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 82,
+      "sourcePage": 43,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 83,
+      "sourcePage": 44,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 84,
+      "sourcePage": 44,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 85,
+      "sourcePage": 45,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 86,
+      "sourcePage": 45,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 87,
+      "sourcePage": 46,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 88,
+      "sourcePage": 46,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 89,
+      "sourcePage": 47,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 90,
+      "sourcePage": 47,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 91,
+      "sourcePage": 48,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 92,
+      "sourcePage": 48,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 93,
+      "sourcePage": 49,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 94,
+      "sourcePage": 49,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 95,
+      "sourcePage": 50,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 96,
+      "sourcePage": 50,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 97,
+      "sourcePage": 51,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 98,
+      "sourcePage": 51,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 99,
+      "sourcePage": 52,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 100,
+      "sourcePage": 52,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 101,
+      "sourcePage": 53,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 102,
+      "sourcePage": 54,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 103,
+      "sourcePage": 55,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 104,
+      "sourcePage": 55,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 105,
+      "sourcePage": 56,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 106,
+      "sourcePage": 56,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 107,
+      "sourcePage": 57,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 108,
+      "sourcePage": 57,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 109,
+      "sourcePage": 58,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 110,
+      "sourcePage": 58,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 111,
+      "sourcePage": 59,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 112,
+      "sourcePage": 59,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 113,
+      "sourcePage": 60,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 114,
+      "sourcePage": 60,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 115,
+      "sourcePage": 61,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 116,
+      "sourcePage": 61,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 117,
+      "sourcePage": 62,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 118,
+      "sourcePage": 62,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 119,
+      "sourcePage": 63,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 120,
+      "sourcePage": 64,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 121,
+      "sourcePage": 64,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 122,
+      "sourcePage": 65,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 123,
+      "sourcePage": 65,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 124,
+      "sourcePage": 66,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 125,
+      "sourcePage": 66,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 126,
+      "sourcePage": 67,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 127,
+      "sourcePage": 67,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 128,
+      "sourcePage": 68,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 129,
+      "sourcePage": 68,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 130,
+      "sourcePage": 69,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Общий заголовок на развороте"
+    },
+    {
+      "page": 131,
+      "sourcePage": 70,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 132,
+      "sourcePage": 70,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 133,
+      "sourcePage": 71,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 134,
+      "sourcePage": 71,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 135,
+      "sourcePage": 72,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 136,
+      "sourcePage": 72,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 137,
+      "sourcePage": 73,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 138,
+      "sourcePage": 73,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 139,
+      "sourcePage": 74,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 140,
+      "sourcePage": 74,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 141,
+      "sourcePage": 75,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 142,
+      "sourcePage": 75,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 143,
+      "sourcePage": 76,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 144,
+      "sourcePage": 76,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 145,
+      "sourcePage": 77,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 146,
+      "sourcePage": 77,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 147,
+      "sourcePage": 78,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 148,
+      "sourcePage": 79,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 149,
+      "sourcePage": 79,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 150,
+      "sourcePage": 80,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 151,
+      "sourcePage": 80,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 152,
+      "sourcePage": 81,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 153,
+      "sourcePage": 81,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 154,
+      "sourcePage": 82,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 155,
+      "sourcePage": 82,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 156,
+      "sourcePage": 83,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 157,
+      "sourcePage": 83,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 158,
+      "sourcePage": 84,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 159,
+      "sourcePage": 84,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 160,
+      "sourcePage": 85,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 161,
+      "sourcePage": 85,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 162,
+      "sourcePage": 86,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 163,
+      "sourcePage": 86,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 164,
+      "sourcePage": 87,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 165,
+      "sourcePage": 87,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 166,
+      "sourcePage": 88,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 167,
+      "sourcePage": 88,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 168,
+      "sourcePage": 89,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 169,
+      "sourcePage": 89,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 170,
+      "sourcePage": 90,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 171,
+      "sourcePage": 90,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 172,
+      "sourcePage": 91,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 173,
+      "sourcePage": 91,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 174,
+      "sourcePage": 92,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 175,
+      "sourcePage": 92,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 176,
+      "sourcePage": 93,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 177,
+      "sourcePage": 93,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 178,
+      "sourcePage": 94,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 179,
+      "sourcePage": 94,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 180,
+      "sourcePage": 95,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 181,
+      "sourcePage": 95,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 182,
+      "sourcePage": 96,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 183,
+      "sourcePage": 96,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 184,
+      "sourcePage": 97,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 185,
+      "sourcePage": 98,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 186,
+      "sourcePage": 99,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 187,
+      "sourcePage": 100,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 188,
+      "sourcePage": 100,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 189,
+      "sourcePage": 101,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 190,
+      "sourcePage": 101,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 191,
+      "sourcePage": 102,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 192,
+      "sourcePage": 102,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 193,
+      "sourcePage": 103,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 194,
+      "sourcePage": 103,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 195,
+      "sourcePage": 104,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 196,
+      "sourcePage": 105,
+      "kind": "spread",
+      "originalHalf": null,
+      "width": 842.52,
+      "height": 595.56,
+      "reason": "Текст пересекает середину листа"
+    },
+    {
+      "page": 197,
+      "sourcePage": 106,
+      "kind": "page",
+      "originalHalf": 0,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    },
+    {
+      "page": 198,
+      "sourcePage": 106,
+      "kind": "page",
+      "originalHalf": 1,
+      "width": 421.26,
+      "height": 595.56,
+      "reason": null
+    }
+  ]
+}

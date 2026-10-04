@@ -10,3 +10,5 @@ body.reading header{height:58px;background:transparent;border-bottom:0}body.read
 }
 
 .pdf-links{position:absolute;inset:0;z-index:3;pointer-events:none}.pdf-link{position:absolute;border:0;border-radius:2px;padding:0;background:transparent;pointer-events:auto;cursor:pointer}.pdf-link:hover{background:rgba(82,108,80,.12)}.pdf-link:active{transform:none}.pdf-link:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+#stage{perspective:none}#book{transform-style:flat;isolation:isolate}.curl-sheet{will-change:auto}
