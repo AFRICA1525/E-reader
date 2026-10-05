@@ -1,1789 +1,1776 @@
 {
-  "version": 1,
-  "title": "JAVA тілінде объектіге-бағытталған бағдарламалау",
+  "version": 2,
+  "edition": 2026,
+  "title": "Java тілінде объектіге бағытталған бағдарламалау",
   "pdf": "./output/pdf/java-reader.pdf",
+  "width": 480,
+  "height": 680,
+  "pageCount": 215,
+  "contents": [
+    {
+      "title": "Оқу құралы туралы",
+      "key": "about",
+      "depth": 0,
+      "page": 2
+    },
+    {
+      "title": "Пәннің мақсаты мен міндеттері",
+      "key": "purpose",
+      "depth": 0,
+      "page": 3
+    },
+    {
+      "title": "Кітаппен жұмыс істеу",
+      "key": "guide",
+      "depth": 0,
+      "page": 4
+    },
+    {
+      "title": "Оқу нәтижелері",
+      "key": "outcomes",
+      "depth": 0,
+      "page": 5
+    },
+    {
+      "title": "Мазмұны",
+      "key": "contents",
+      "depth": 0,
+      "page": 6
+    },
+    {
+      "title": "Теориялық бөлім",
+      "key": "theory",
+      "depth": 0,
+      "page": 10
+    },
+    {
+      "title": "Дәріс 1. Кіріспе",
+      "key": "lecture-1",
+      "depth": 1,
+      "page": 11
+    },
+    {
+      "title": "Дәріс 2. Тілдің негіздері, мәліметтер түрлері және өңдеу ортасы",
+      "key": "lecture-2",
+      "depth": 1,
+      "page": 15
+    },
+    {
+      "title": "Дәріс 3. Мәліметтерді енгізу және шығару",
+      "key": "lecture-3",
+      "depth": 1,
+      "page": 22
+    },
+    {
+      "title": "Дәріс 4. Базалық математикалық операциялар және есептеулер",
+      "key": "lecture-4",
+      "depth": 1,
+      "page": 26
+    },
+    {
+      "title": "Дәріс 5. Шартты оператор: if",
+      "key": "lecture-5",
+      "depth": 1,
+      "page": 36
+    },
+    {
+      "title": "Дәріс 6. Циклдік операторлар: for және while",
+      "key": "lecture-6",
+      "depth": 1,
+      "page": 40
+    },
+    {
+      "title": "Дәріс 7. Тізімдер",
+      "key": "lecture-7",
+      "depth": 1,
+      "page": 47
+    },
+    {
+      "title": "Дәріс 8. Рекурсия және екі өлшемді массивтер",
+      "key": "lecture-8",
+      "depth": 1,
+      "page": 51
+    },
+    {
+      "title": "Дәріс 9. Функцияны хабарлау. Жиындар",
+      "key": "lecture-9",
+      "depth": 1,
+      "page": 56
+    },
+    {
+      "title": "Дәріс 10. Сөздіктер",
+      "key": "lecture-10",
+      "depth": 1,
+      "page": 61
+    },
+    {
+      "title": "Дәріс 11. Объектіге бағытталған бағдарламалауға кіріспе",
+      "key": "lecture-11",
+      "depth": 1,
+      "page": 65
+    },
+    {
+      "title": "Дәріс 12. Модульдер",
+      "key": "lecture-12",
+      "depth": 1,
+      "page": 70
+    },
+    {
+      "title": "Дәріс 13. Mathlab тәрізді және өзге кітапханаларды пайдалану",
+      "key": "lecture-13",
+      "depth": 1,
+      "page": 76
+    },
+    {
+      "title": "Дәріс 14. Қателерді талдау: throwExceptions",
+      "key": "lecture-14",
+      "depth": 1,
+      "page": 86
+    },
+    {
+      "title": "Дәріс 15. Ерекше жағдайларды өңдеу және бағдарламаның тұрақтылығы",
+      "key": "lecture-15",
+      "depth": 1,
+      "page": 93
+    },
+    {
+      "title": "Практикалық бөлім",
+      "key": "practice",
+      "depth": 0,
+      "page": 96
+    },
+    {
+      "title": "Зертханалық жұмыс №1",
+      "key": "lab-1",
+      "depth": 1,
+      "page": 98
+    },
+    {
+      "title": "Зертханалық жұмыс №2",
+      "key": "lab-2",
+      "depth": 1,
+      "page": 103
+    },
+    {
+      "title": "Зертханалық жұмыс №3",
+      "key": "lab-3",
+      "depth": 1,
+      "page": 105
+    },
+    {
+      "title": "Зертханалық жұмыс №4",
+      "key": "lab-4",
+      "depth": 1,
+      "page": 108
+    },
+    {
+      "title": "Зертханалық жұмыс №5-6",
+      "key": "lab-5-6",
+      "depth": 1,
+      "page": 113
+    },
+    {
+      "title": "Зертханалық жұмыс №7",
+      "key": "lab-7",
+      "depth": 1,
+      "page": 120
+    },
+    {
+      "title": "Зертханалық жұмыс №8",
+      "key": "lab-8",
+      "depth": 1,
+      "page": 126
+    },
+    {
+      "title": "Зертханалық жұмыс №9",
+      "key": "lab-9",
+      "depth": 1,
+      "page": 130
+    },
+    {
+      "title": "Зертханалық жұмыс №10",
+      "key": "lab-10",
+      "depth": 1,
+      "page": 136
+    },
+    {
+      "title": "Зертханалық жұмыс №11",
+      "key": "lab-11",
+      "depth": 1,
+      "page": 140
+    },
+    {
+      "title": "Зертханалық жұмыс №12",
+      "key": "lab-12",
+      "depth": 1,
+      "page": 142
+    },
+    {
+      "title": "Зертханалық жұмыс №13",
+      "key": "lab-13",
+      "depth": 1,
+      "page": 157
+    },
+    {
+      "title": "Зертханалық жұмыс №14",
+      "key": "lab-14",
+      "depth": 1,
+      "page": 162
+    },
+    {
+      "title": "Зертханалық жұмыс №15",
+      "key": "lab-15",
+      "depth": 1,
+      "page": 167
+    },
+    {
+      "title": "Білімді бақылау",
+      "key": "assessment",
+      "depth": 0,
+      "page": 171
+    },
+    {
+      "title": "Дәріс 1. Білімді бақылау",
+      "key": "control-1",
+      "depth": 1,
+      "page": 172
+    },
+    {
+      "title": "Дәріс 2. Білімді бақылау",
+      "key": "control-2",
+      "depth": 1,
+      "page": 174
+    },
+    {
+      "title": "Дәріс 3. Білімді бақылау",
+      "key": "control-3",
+      "depth": 1,
+      "page": 176
+    },
+    {
+      "title": "Дәріс 4. Білімді бақылау",
+      "key": "control-4",
+      "depth": 1,
+      "page": 178
+    },
+    {
+      "title": "Дәріс 5. Білімді бақылау",
+      "key": "control-5",
+      "depth": 1,
+      "page": 180
+    },
+    {
+      "title": "Дәріс 6. Білімді бақылау",
+      "key": "control-6",
+      "depth": 1,
+      "page": 182
+    },
+    {
+      "title": "Дәріс 7. Білімді бақылау",
+      "key": "control-7",
+      "depth": 1,
+      "page": 184
+    },
+    {
+      "title": "Дәріс 8. Білімді бақылау",
+      "key": "control-8",
+      "depth": 1,
+      "page": 186
+    },
+    {
+      "title": "Дәріс 9. Білімді бақылау",
+      "key": "control-9",
+      "depth": 1,
+      "page": 188
+    },
+    {
+      "title": "Дәріс 10. Білімді бақылау",
+      "key": "control-10",
+      "depth": 1,
+      "page": 190
+    },
+    {
+      "title": "Дәріс 11. Білімді бақылау",
+      "key": "control-11",
+      "depth": 1,
+      "page": 192
+    },
+    {
+      "title": "Дәріс 12. Білімді бақылау",
+      "key": "control-12",
+      "depth": 1,
+      "page": 194
+    },
+    {
+      "title": "Дәріс 13. Білімді бақылау",
+      "key": "control-13",
+      "depth": 1,
+      "page": 196
+    },
+    {
+      "title": "Дәріс 14. Білімді бақылау",
+      "key": "control-14",
+      "depth": 1,
+      "page": 198
+    },
+    {
+      "title": "Дәріс 15. Білімді бақылау",
+      "key": "control-15",
+      "depth": 1,
+      "page": 200
+    },
+    {
+      "title": "Глоссарий",
+      "key": "glossary",
+      "depth": 0,
+      "page": 202
+    },
+    {
+      "title": "Қорытынды",
+      "key": "conclusion",
+      "depth": 0,
+      "page": 206
+    },
+    {
+      "title": "Пайдаланған әдебиеттер",
+      "key": "references",
+      "depth": 0,
+      "page": 207
+    },
+    {
+      "title": "Қосымшалар",
+      "key": "appendices",
+      "depth": 0,
+      "page": 210
+    },
+    {
+      "title": "A. Консольдік енгізу және есептеу",
+      "key": "appendix-a",
+      "depth": 1,
+      "page": 211
+    },
+    {
+      "title": "B. Рекурсия және матрица",
+      "key": "appendix-b",
+      "depth": 1,
+      "page": 212
+    },
+    {
+      "title": "C. Жолдар және коллекциялар",
+      "key": "appendix-c",
+      "depth": 1,
+      "page": 213
+    },
+    {
+      "title": "D. Объект және конструктор",
+      "key": "appendix-d",
+      "depth": 1,
+      "page": 214
+    },
+    {
+      "title": "E. №15 жұмысқа тексеру хаттамасы",
+      "key": "appendix-e",
+      "depth": 1,
+      "page": 215
+    }
+  ],
+  "videos": [
+    {
+      "lecture": 1,
+      "id": "0uzIT-woqPk",
+      "url": "https://www.youtube.com/watch?v=0uzIT-woqPk",
+      "title": "Лекция 1 Объектіге бағытталған бағдарламалауға кіріспе",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 2,
+      "id": "Oy8iUj-t0ME",
+      "url": "https://www.youtube.com/watch?v=Oy8iUj-t0ME",
+      "title": "Java программалау тілі / Сабақ #1.",
+      "author": "Школа Пргограмирования"
+    },
+    {
+      "lecture": 3,
+      "id": "J15ZmrZ0eKY",
+      "url": "https://www.youtube.com/watch?v=J15ZmrZ0eKY",
+      "title": "Лекция 8 Кіріс шығыс үрдістері",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 4,
+      "id": "Oy8iUj-t0ME",
+      "url": "https://www.youtube.com/watch?v=Oy8iUj-t0ME",
+      "title": "Java программалау тілі / Сабақ #1.",
+      "author": "Школа Пргограмирования"
+    },
+    {
+      "lecture": 5,
+      "id": "QnXjS2__woI",
+      "url": "https://www.youtube.com/watch?v=QnXjS2__woI",
+      "title": "Java программалау тілі / Сабақ #2. Шартты оператор",
+      "author": "Школа Пргограмирования"
+    },
+    {
+      "lecture": 6,
+      "id": "BwR8B-xyacI",
+      "url": "https://www.youtube.com/watch?v=BwR8B-xyacI",
+      "title": "Алгоритмдер қазақша | #2 — Сұрыптау алгоритмдері",
+      "author": "CodeeKZ — ашық IT сабақтары"
+    },
+    {
+      "lecture": 7,
+      "id": "1cCErm7m9uI",
+      "url": "https://www.youtube.com/watch?v=1cCErm7m9uI",
+      "title": "Лекция 6 Жолдармен жұмыс",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 8,
+      "id": "_0wTQlUfyog",
+      "url": "https://www.youtube.com/watch?v=_0wTQlUfyog",
+      "title": "Java. ООП. Матрицаны құру және көбейту программасы",
+      "author": "Aibol Maxotov"
+    },
+    {
+      "lecture": 9,
+      "id": "l5Sm2Ps6AOg",
+      "url": "https://www.youtube.com/watch?v=l5Sm2Ps6AOg",
+      "title": "Пайдаланушы функциялары мен процедуралары. Рекурсия",
+      "author": "Қашықтан үйрен / Информатика АКТ"
+    },
+    {
+      "lecture": 10,
+      "id": "ymEk7l1pDXk",
+      "url": "https://www.youtube.com/watch?v=ymEk7l1pDXk",
+      "title": "Лекция 10 Объектіге бағытталған бағдарламалау принциптерін жолдарға қолдану",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 11,
+      "id": "e2_9PspS438",
+      "url": "https://www.youtube.com/watch?v=e2_9PspS438",
+      "title": "Лекция 2 Объектіге бағытталған әдіс",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 12,
+      "id": "-FwgqBZ4pzg",
+      "url": "https://www.youtube.com/watch?v=-FwgqBZ4pzg",
+      "title": "Лекция 3 Объектілер мен класстар  туралы түсінік",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 13,
+      "id": "Adfis0xegGY",
+      "url": "https://www.youtube.com/watch?v=Adfis0xegGY",
+      "title": "Лекция 7 Java тілінің стандартты кітапханалары және пакеттер",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 14,
+      "id": "5P1JN5l7saI",
+      "url": "https://www.youtube.com/watch?v=5P1JN5l7saI",
+      "title": "Лекция 9 Ерекшеліктерді өңдеу",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    },
+    {
+      "lecture": 15,
+      "id": "5P1JN5l7saI",
+      "url": "https://www.youtube.com/watch?v=5P1JN5l7saI",
+      "title": "Лекция 9 Ерекшеліктерді өңдеу",
+      "author": "КиИИ_КарТУ имени Абылкаса Сагинова"
+    }
+  ],
   "pages": [
     {
       "page": 1,
-      "sourcePage": 1,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 2,
-      "sourcePage": 2,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 3,
-      "sourcePage": 3,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 4,
-      "sourcePage": 4,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 5,
-      "sourcePage": 4,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 6,
-      "sourcePage": 5,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 7,
-      "sourcePage": 5,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 8,
-      "sourcePage": 6,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 9,
-      "sourcePage": 6,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 10,
-      "sourcePage": 7,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 11,
-      "sourcePage": 7,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 12,
-      "sourcePage": 8,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 13,
-      "sourcePage": 8,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 14,
-      "sourcePage": 9,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 15,
-      "sourcePage": 9,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 16,
-      "sourcePage": 10,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 17,
-      "sourcePage": 10,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 18,
-      "sourcePage": 11,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 19,
-      "sourcePage": 11,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 20,
-      "sourcePage": 12,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 21,
-      "sourcePage": 12,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 22,
-      "sourcePage": 13,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 23,
-      "sourcePage": 13,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 24,
-      "sourcePage": 14,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 25,
-      "sourcePage": 14,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 26,
-      "sourcePage": 15,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 27,
-      "sourcePage": 15,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 28,
-      "sourcePage": 16,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 29,
-      "sourcePage": 16,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 30,
-      "sourcePage": 17,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 31,
-      "sourcePage": 18,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 32,
-      "sourcePage": 18,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 33,
-      "sourcePage": 19,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 34,
-      "sourcePage": 19,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 35,
-      "sourcePage": 20,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 36,
-      "sourcePage": 20,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 37,
-      "sourcePage": 21,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 38,
-      "sourcePage": 21,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 39,
-      "sourcePage": 22,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 40,
-      "sourcePage": 22,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 41,
-      "sourcePage": 23,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 42,
-      "sourcePage": 23,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 43,
-      "sourcePage": 24,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 44,
-      "sourcePage": 24,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 45,
-      "sourcePage": 25,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 46,
-      "sourcePage": 25,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 47,
-      "sourcePage": 26,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 48,
-      "sourcePage": 26,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 49,
-      "sourcePage": 27,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 50,
-      "sourcePage": 27,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 51,
-      "sourcePage": 28,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 52,
-      "sourcePage": 28,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 53,
-      "sourcePage": 29,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 54,
-      "sourcePage": 29,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 55,
-      "sourcePage": 30,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 56,
-      "sourcePage": 30,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 57,
-      "sourcePage": 31,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 58,
-      "sourcePage": 31,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 59,
-      "sourcePage": 32,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 60,
-      "sourcePage": 32,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 61,
-      "sourcePage": 33,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 62,
-      "sourcePage": 33,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 63,
-      "sourcePage": 34,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 64,
-      "sourcePage": 34,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 65,
-      "sourcePage": 35,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 66,
-      "sourcePage": 35,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 67,
-      "sourcePage": 36,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 68,
-      "sourcePage": 36,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 69,
-      "sourcePage": 37,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 70,
-      "sourcePage": 37,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 71,
-      "sourcePage": 38,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 72,
-      "sourcePage": 38,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 73,
-      "sourcePage": 39,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 74,
-      "sourcePage": 39,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 75,
-      "sourcePage": 40,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 76,
-      "sourcePage": 40,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 77,
-      "sourcePage": 41,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 78,
-      "sourcePage": 41,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 79,
-      "sourcePage": 42,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 80,
-      "sourcePage": 42,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 81,
-      "sourcePage": 43,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 82,
-      "sourcePage": 43,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 83,
-      "sourcePage": 44,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 84,
-      "sourcePage": 44,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 85,
-      "sourcePage": 45,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 86,
-      "sourcePage": 45,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 87,
-      "sourcePage": 46,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 88,
-      "sourcePage": 46,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 89,
-      "sourcePage": 47,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 90,
-      "sourcePage": 47,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 91,
-      "sourcePage": 48,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 92,
-      "sourcePage": 48,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 93,
-      "sourcePage": 49,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 94,
-      "sourcePage": 49,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 95,
-      "sourcePage": 50,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 96,
-      "sourcePage": 50,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 97,
-      "sourcePage": 51,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 98,
-      "sourcePage": 51,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 99,
-      "sourcePage": 52,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 100,
-      "sourcePage": 52,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 101,
-      "sourcePage": 53,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 102,
-      "sourcePage": 54,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 103,
-      "sourcePage": 55,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 104,
-      "sourcePage": 55,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 105,
-      "sourcePage": 56,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 106,
-      "sourcePage": 56,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 107,
-      "sourcePage": 57,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 108,
-      "sourcePage": 57,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 109,
-      "sourcePage": 58,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 110,
-      "sourcePage": 58,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 111,
-      "sourcePage": 59,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 112,
-      "sourcePage": 59,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 113,
-      "sourcePage": 60,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 114,
-      "sourcePage": 60,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 115,
-      "sourcePage": 61,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 116,
-      "sourcePage": 61,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 117,
-      "sourcePage": 62,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 118,
-      "sourcePage": 62,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 119,
-      "sourcePage": 63,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 120,
-      "sourcePage": 64,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 121,
-      "sourcePage": 64,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 122,
-      "sourcePage": 65,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 123,
-      "sourcePage": 65,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 124,
-      "sourcePage": 66,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 125,
-      "sourcePage": 66,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 126,
-      "sourcePage": 67,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 127,
-      "sourcePage": 67,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 128,
-      "sourcePage": 68,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 129,
-      "sourcePage": 68,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 130,
-      "sourcePage": 69,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Общий заголовок на развороте"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 131,
-      "sourcePage": 70,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 132,
-      "sourcePage": 70,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 133,
-      "sourcePage": 71,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 134,
-      "sourcePage": 71,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 135,
-      "sourcePage": 72,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 136,
-      "sourcePage": 72,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 137,
-      "sourcePage": 73,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 138,
-      "sourcePage": 73,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 139,
-      "sourcePage": 74,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 140,
-      "sourcePage": 74,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 141,
-      "sourcePage": 75,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 142,
-      "sourcePage": 75,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 143,
-      "sourcePage": 76,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 144,
-      "sourcePage": 76,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 145,
-      "sourcePage": 77,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 146,
-      "sourcePage": 77,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 147,
-      "sourcePage": 78,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 148,
-      "sourcePage": 79,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 149,
-      "sourcePage": 79,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 150,
-      "sourcePage": 80,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 151,
-      "sourcePage": 80,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 152,
-      "sourcePage": 81,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 153,
-      "sourcePage": 81,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 154,
-      "sourcePage": 82,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 155,
-      "sourcePage": 82,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 156,
-      "sourcePage": 83,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 157,
-      "sourcePage": 83,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 158,
-      "sourcePage": 84,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 159,
-      "sourcePage": 84,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 160,
-      "sourcePage": 85,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 161,
-      "sourcePage": 85,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 162,
-      "sourcePage": 86,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 163,
-      "sourcePage": 86,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 164,
-      "sourcePage": 87,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 165,
-      "sourcePage": 87,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 166,
-      "sourcePage": 88,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 167,
-      "sourcePage": 88,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 168,
-      "sourcePage": 89,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 169,
-      "sourcePage": 89,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 170,
-      "sourcePage": 90,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 171,
-      "sourcePage": 90,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 172,
-      "sourcePage": 91,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 173,
-      "sourcePage": 91,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 174,
-      "sourcePage": 92,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 175,
-      "sourcePage": 92,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 176,
-      "sourcePage": 93,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 177,
-      "sourcePage": 93,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 178,
-      "sourcePage": 94,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 179,
-      "sourcePage": 94,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 180,
-      "sourcePage": 95,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 181,
-      "sourcePage": 95,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 182,
-      "sourcePage": 96,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 183,
-      "sourcePage": 96,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 184,
-      "sourcePage": 97,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 185,
-      "sourcePage": 98,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 186,
-      "sourcePage": 99,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 187,
-      "sourcePage": 100,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 188,
-      "sourcePage": 100,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 189,
-      "sourcePage": 101,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 190,
-      "sourcePage": 101,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 191,
-      "sourcePage": 102,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 192,
-      "sourcePage": 102,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 193,
-      "sourcePage": 103,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 194,
-      "sourcePage": 103,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 195,
-      "sourcePage": 104,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 196,
-      "sourcePage": 105,
-      "kind": "spread",
-      "originalHalf": null,
-      "width": 842.52,
-      "height": 595.56,
-      "reason": "Текст пересекает середину листа"
+      "kind": "page",
+      "width": 480,
+      "height": 680
     },
     {
       "page": 197,
-      "sourcePage": 106,
       "kind": "page",
-      "originalHalf": 0,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
     },
     {
       "page": 198,
-      "sourcePage": 106,
       "kind": "page",
-      "originalHalf": 1,
-      "width": 421.26,
-      "height": 595.56,
-      "reason": null
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 199,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 200,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 201,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 202,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 203,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 204,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 205,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 206,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 207,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 208,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 209,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 210,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 211,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 212,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 213,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 214,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 215,
+      "kind": "page",
+      "width": 480,
+      "height": 680
     }
   ]
 }

@@ -20,10 +20,12 @@ export async function pageLinks(doc,entry){
   const page=await doc.getPage(entry.source),view=page.getViewport({scale:1}),annotations=await page.getAnnotations({intent:'display'}),links=[];
   const cropLeft=entry.half===1?view.width/2:0,cropWidth=entry.half===null?view.width:view.width/2;
   for(const annotation of annotations){
-   if(annotation.subtype!=='Link'||!annotation.dest||!annotation.rect)continue;
+   if(annotation.subtype!=='Link'||(!annotation.dest&&!annotation.url)||!annotation.rect)continue;
    const box=view.convertToViewportRectangle(annotation.rect),left=Math.max(cropLeft,Math.min(box[0],box[2])),right=Math.min(cropLeft+cropWidth,Math.max(box[0],box[2])),top=Math.max(0,Math.min(box[1],box[3])),bottom=Math.min(view.height,Math.max(box[1],box[3]));
    if(right<=left||bottom<=top)continue;
-   try{const target=await resolveDestination(doc,annotation.dest);if(target)links.push({x:(left-cropLeft)/cropWidth,y:top/view.height,width:(right-left)/cropWidth,height:(bottom-top)/view.height,target});}catch{}
+   const rect={x:(left-cropLeft)/cropWidth,y:top/view.height,width:(right-left)/cropWidth,height:(bottom-top)/view.height};
+   if(annotation.url){try{const url=new URL(annotation.url);if(['https:','http:'].includes(url.protocol))links.push({...rect,url:url.href});}catch{}continue;}
+   try{const target=await resolveDestination(doc,annotation.dest);if(target)links.push({...rect,target});}catch{}
   }
   return links;
  });
@@ -32,6 +34,6 @@ export async function attachPageLinks(doc,pages,entries,canvases,book,isCurrent,
  const groups=await Promise.all(entries.map(e=>pageLinks(doc,e)));if(!isCurrent())return;
  book.querySelector('.pdf-links')?.remove();const layer=document.createElement('div');layer.className='pdf-links';let offset=0;
  groups.forEach((links,i)=>{const width=parseFloat(canvases[i].style.width),height=parseFloat(canvases[i].style.height);
-  links.forEach(link=>{const index=destinationIndex(pages,link.target);if(index<0)return;const button=document.createElement('button');button.type='button';button.className='pdf-link';button.setAttribute('aria-label',`Перейти к странице ${index+1}`);button.title=`Перейти к странице ${index+1}`;button.style.cssText=`left:${offset+link.x*width}px;top:${link.y*height}px;width:${link.width*width}px;height:${link.height*height}px`;button.onclick=e=>{e.stopPropagation();navigate(index)};layer.append(button)});offset+=width;
+  links.forEach(link=>{const index=link.target?destinationIndex(pages,link.target):-1;if(!link.url&&index<0)return;const button=document.createElement(link.url?'a':'button');if(link.url){button.href=link.url;button.target='_blank';button.rel='noopener noreferrer';button.setAttribute('aria-label','Видеосабақ немесе дереккөзді ашу');button.title='Видеосабақ немесе дереккөзді ашу';button.onclick=e=>e.stopPropagation();}else{button.type='button';button.setAttribute('aria-label',`${index+1}-бетке өту`);button.title=`${index+1}-бетке өту`;button.onclick=e=>{e.stopPropagation();navigate(index)};}button.className='pdf-link';button.style.cssText=`left:${offset+link.x*width}px;top:${link.y*height}px;width:${link.width*width}px;height:${link.height*height}px`;layer.append(button)});offset+=width;
  });book.append(layer);
 }
