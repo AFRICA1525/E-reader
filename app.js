@@ -9,6 +9,9 @@ let pdf, profile, pages = [], index = 0, zoom = 1, busy = false, renderVersion =
 let gesture = null, curl = null, suppressClickUntil = 0, resizeTimer, warmTimer;
 const cache = new Map(), pending = new Map();
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phoneQuery = matchMedia('(max-width: 760px), (max-width: 1000px) and (max-height: 600px)');
+const pageStep = () => phoneQuery.matches ? 1 : 2;
+const normalizePage = target => Math.floor(Math.max(0, Math.min(pages.length - 1, target)) / pageStep()) * pageStep();
 const positionKey = 'java-textbook:2026:position';
 function toast(message) {
   $('toast').textContent = message; $('toast').classList.add('show');
@@ -17,10 +20,12 @@ function toast(message) {
 function sound() { if (!reducedMotion()) playPageSound(); }
 function savePosition() { try { localStorage.setItem(positionKey, String(index)); } catch {} }
 function layout(i = index) {
-  const entries = pages.slice(i, i + 2), stage = $('stage');
-  const width = Math.max(80, stage.clientWidth - (innerWidth < 600 ? 4 : 60));
-  const height = Math.max(80, stage.clientHeight - (innerWidth < 600 ? 16 : 40));
-  const scale = Math.min(width / (profile.width * 2), height / profile.height) * zoom;
+  const count = pageStep(), entries = pages.slice(i, i + count), stage = $('stage');
+  const width = Math.max(80, stage.clientWidth - (count === 1 ? 24 : 60));
+  const height = Math.max(80, stage.clientHeight - 40);
+  // Phone pages use the available width; short landscape screens scroll
+  // vertically instead of shrinking the text into an unreadable thumbnail.
+  const scale = (count === 1 ? width / profile.width : Math.min(width / (profile.width * 2), height / profile.height)) * zoom;
   return {entries, scale, ratio: Math.min(devicePixelRatio || 1, 2)};
 }
 async function canvasFor(entry, width) {
@@ -46,7 +51,10 @@ async function canvasFor(entry, width) {
 function updateNavigation(entries) {
   $('pageInput').value = index + 1; $('pageInput').max = pages.length;
   $('pageTotal').textContent = `${entries.length > 1 ? '– ' + (index + 2) : ''} / ${pages.length}`;
-  $('prev').disabled = index === 0; $('next').disabled = index + 2 >= pages.length;
+  $('prev').disabled = index === 0; $('next').disabled = index + pageStep() >= pages.length;
+  $('prev').setAttribute('aria-label', pageStep() === 1 ? 'Алдыңғы бет' : 'Алдыңғы екі бет');
+  $('next').setAttribute('aria-label', pageStep() === 1 ? 'Келесі бет' : 'Келесі екі бет');
+  document.querySelector('.reading-hint').textContent = pageStep() === 1 ? 'Бір бет · ыңғайлы оқу' : 'Екі бет · бір кітап';
   $('progressFill').style.width = `${(index + entries.length) / pages.length * 100}%`;
   const current = [...profile.contents].reverse().find(item => item.page <= index + entries.length);
   $('chapterLabel').textContent = current?.title || profile.title;
@@ -60,6 +68,7 @@ function updateNavigation(entries) {
 async function render(direction = 0) {
   if (!pdf) return;
   const version = ++renderVersion, book = $('book'), {entries, scale, ratio} = layout();
+  book.classList.toggle('double', pageStep() === 2);
   const canvases = await Promise.all(entries.map(async entry => {
     const canvas = await canvasFor(entry, Math.min(2600, entry.width * scale * ratio));
     canvas.style.width = `${entry.width * scale}px`; canvas.style.height = `${entry.height * scale}px`;
@@ -68,9 +77,9 @@ async function render(direction = 0) {
   }));
   if (version !== renderVersion) return;
   let turning = curl;
-  if (direction && !reducedMotion() && zoom === 1 && !turning) turning = makeCurl(book, direction);
+  if (direction && pageStep() === 2 && !reducedMotion() && zoom === 1 && !turning) turning = makeCurl(book, direction);
   book.replaceChildren(...canvases);
-  if (canvases.length === 1) {
+  if (canvases.length === 1 && pageStep() === 2) {
     const blank = document.createElement('div'); blank.className = 'blank-page';
     blank.style.cssText = `width:${profile.width * scale}px;height:${profile.height * scale}px`; book.append(blank);
   }
@@ -83,7 +92,7 @@ async function render(direction = 0) {
   clearTimeout(warmTimer);
   warmTimer = setTimeout(async () => {
     prepareCurl();
-    for (const target of [index + 2, index - 2]) {
+    for (const target of [index + pageStep(), index - pageStep()]) {
       if (version !== renderVersion || target < 0 || target >= pages.length) continue;
       const next = layout(target);
       for (const entry of next.entries) {
@@ -95,7 +104,7 @@ async function render(direction = 0) {
 }
 async function go(target, direction = 0) {
   if (!pdf || busy || !Number.isFinite(target)) return;
-  const next = Math.floor(Math.max(0, Math.min(pages.length - 1, target)) / 2) * 2;
+  const next = normalizePage(target);
   if (next === index) return;
   busy = true;
   const previous = index;
@@ -110,8 +119,14 @@ async function go(target, direction = 0) {
 }
 function setContents(open) {
   $('sidebar').hidden = !open; $('sideToggle').setAttribute('aria-expanded', String(open));
+  document.body.classList.toggle('contents-open', open);
+  document.querySelector('main').inert = open && phoneQuery.matches;
+  document.querySelector('header').inert = open && phoneQuery.matches;
   requestAnimationFrame(() => render().catch(console.error));
-  if (open) $('closeSide').focus(); else $('sideToggle').focus();
+  if (open) {
+    $('closeSide').focus();
+    $('sideContent').querySelector('.active')?.scrollIntoView({block:'center'});
+  } else $('sideToggle').focus();
 }
 function buildContents() {
   const content = $('sideContent'); content.replaceChildren();
@@ -122,7 +137,7 @@ function buildContents() {
     label.className = 'label'; label.textContent = item.title; page.className = 'page'; page.textContent = item.page;
     button.append(label, page); button.onclick = async () => {
       if (busy) return;
-      if (innerWidth <= 900) { $('sidebar').hidden = true; $('sideToggle').setAttribute('aria-expanded', 'false'); }
+      if (innerWidth <= 900 || phoneQuery.matches) setContents(false);
       await go(item.page - 1); await render();
     };
     content.append(button);
@@ -136,9 +151,9 @@ function updateZoom() {
 async function toggleZoom(point) {
   if (!pdf || busy) return;
   const box = $('book').getBoundingClientRect();
-  const x = point ? (point.clientX - box.left) / box.width : .5;
-  const y = point ? (point.clientY - box.top) / box.height : .3;
-  zoom = zoom === 1 ? (innerWidth < 600 ? 2.8 : 1.6) : 1; updateZoom();
+  const x = point ? (point.clientX - box.left) / box.width : phoneQuery.matches ? 0 : .5;
+  const y = point ? (point.clientY - box.top) / box.height : phoneQuery.matches ? 0 : .3;
+  zoom = zoom === 1 ? (phoneQuery.matches ? 1.7 : 1.6) : 1; updateZoom();
   try {
     await render();
     if (zoom > 1) $('stage').scrollTo(Math.max(0, x * $('book').offsetWidth - $('stage').clientWidth / 2), Math.max(0, y * $('book').offsetHeight - $('stage').clientHeight / 2));
@@ -156,14 +171,14 @@ async function loadBook() {
     pdf = await pdfjs.getDocument({data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false}).promise;
     pages = Array.from({length: pdf.numPages}, (_, i) => ({source: i + 1, half: null, width: profile.width, height: profile.height}));
     let saved = 0; try { saved = Number(localStorage.getItem(positionKey)) || 0; } catch {}
-    index = Math.floor(Math.max(0, Math.min(pages.length - 1, saved)) / 2) * 2;
+    index = normalizePage(saved);
     buildContents(); await render();
   } catch (error) {
     console.error(error); $('errorText').textContent = `${error.message} Сайтты HTTP-сервер арқылы ашыңыз және output/pdf папкасын тексеріңіз.`;
     $('error').hidden = false;
   } finally { $('loading').hidden = true; }
 }
-$('prev').onclick = () => go(index - 2, -1); $('next').onclick = () => go(index + 2, 1);
+$('prev').onclick = () => go(index - pageStep(), -1); $('next').onclick = () => go(index + pageStep(), 1);
 $('pageInput').onchange = async e => { const target = Number(e.target.value); if (target >= 1) await go(target - 1); e.target.value = index + 1; };
 $('pageInput').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); $('pageInput').onchange(e); } };
 $('sideToggle').onclick = () => setContents($('sidebar').hidden); $('closeSide').onclick = () => setContents(false);
@@ -175,8 +190,14 @@ $('fullscreen').onclick = async () => {
 };
 document.addEventListener('keydown', e => {
   if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
-  if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 2, 1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 2, -1); }
+  if (e.key === 'Tab' && phoneQuery.matches && !$('sidebar').hidden) {
+    const buttons = [...$('sidebar').querySelectorAll('button')];
+    const first = buttons[0], last = buttons.at(-1);
+    if (e.shiftKey && e.target === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && e.target === last) { e.preventDefault(); first.focus(); }
+  }
+  if (e.key === 'ArrowRight') { e.preventDefault(); go(index + pageStep(), 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - pageStep(), -1); }
   if (e.key === 'Home') { e.preventDefault(); go(0); }
   if (e.key === 'End') { e.preventDefault(); go(pages.length - 1); }
   if (e.key.toLowerCase() === 'f') $('fullscreen').click();
@@ -184,6 +205,13 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('pointerdown', preparePageSound, {passive: true});
 window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (!busy && !gesture) render().catch(console.error); }, 150); });
+phoneQuery.addEventListener('change', async () => {
+  await cancelGesture();
+  zoom = 1; updateZoom();
+  if (pdf) index = normalizePage(index);
+  setContents(false);
+  $('stage').scrollTo(0, 0);
+});
 $('stage').addEventListener('pointerdown', e => {
   if (!pdf || busy || zoom !== 1 || e.target.closest('.pdf-link') || e.pointerType === 'mouse' && e.button !== 0) return;
   gesture = {id: e.pointerId, x: e.clientX, y: e.clientY, time: performance.now(), direction: 0};
@@ -195,9 +223,9 @@ $('stage').addEventListener('pointermove', e => {
     if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) { gesture = null; return; }
     if (Math.abs(dx) < 12 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
     const direction = dx < 0 ? 1 : -1;
-    if (direction > 0 && index + 2 >= pages.length || direction < 0 && index === 0) { gesture = null; return; }
+    if (direction > 0 && index + pageStep() >= pages.length || direction < 0 && index === 0) { gesture = null; return; }
     gesture.direction = direction; $('stage').setPointerCapture(e.pointerId);
-    if (!reducedMotion()) curl = makeCurl($('book'), direction, gesture.y);
+    if (pageStep() === 2 && !reducedMotion()) curl = makeCurl($('book'), direction, gesture.y);
   }
   e.preventDefault(); gesture.distance = Math.max(0, dx * -gesture.direction);
   if (curl) { curl.dragY = Math.max(-.4, Math.min(.4, dy / curl.height)); paintCurl(curl, Math.min(.88, gesture.distance / curl.width)); }
@@ -211,7 +239,7 @@ $('stage').addEventListener('pointerup', async e => {
   const current = gesture; gesture = null; if (!current.direction) return;
   suppressClickUntil = performance.now() + 400;
   const distance = current.distance || 0, elapsed = Math.max(1, performance.now() - current.time);
-  if (distance > Math.min(85, $('stage').clientWidth * .18) || distance > 28 && distance / elapsed > .35) await go(index + current.direction * 2, current.direction);
+  if (distance > Math.min(85, $('stage').clientWidth * .18) || distance > 28 && distance / elapsed > .35) await go(index + current.direction * pageStep(), current.direction);
   else await cancelGesture();
 });
 $('stage').addEventListener('pointercancel', cancelGesture);
