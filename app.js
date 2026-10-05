@@ -7,6 +7,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = './vendor/pdf.worker.mjs';
 const $ = id => document.getElementById(id);
 let pdf, profile, pages = [], index = 0, zoom = 1, busy = false, renderVersion = 0;
 let gesture = null, curl = null, suppressClickUntil = 0, resizeTimer, warmTimer;
+let pinch = null, pan = null;
+const pointers = new Map();
 const cache = new Map(), pending = new Map();
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const phoneQuery = matchMedia('(max-width: 760px), (max-width: 1000px) and (max-height: 600px)');
@@ -23,9 +25,7 @@ function layout(i = index) {
   const count = pageStep(), entries = pages.slice(i, i + count), stage = $('stage');
   const width = Math.max(80, stage.clientWidth - (count === 1 ? 24 : 60));
   const height = Math.max(80, stage.clientHeight - 40);
-  // Phone pages use the available width; short landscape screens scroll
-  // vertically instead of shrinking the text into an unreadable thumbnail.
-  const scale = (count === 1 ? width / profile.width : Math.min(width / (profile.width * 2), height / profile.height)) * zoom;
+  const scale = Math.min(width / (profile.width * count), height / profile.height) * zoom;
   return {entries, scale, ratio: Math.min(devicePixelRatio || 1, 2)};
 }
 async function canvasFor(entry, width) {
@@ -77,7 +77,7 @@ async function render(direction = 0) {
   }));
   if (version !== renderVersion) return;
   let turning = curl;
-  if (direction && pageStep() === 2 && !reducedMotion() && zoom === 1 && !turning) turning = makeCurl(book, direction);
+  if (direction && !reducedMotion() && zoom === 1 && !turning) turning = makeCurl(book, direction);
   book.replaceChildren(...canvases);
   if (canvases.length === 1 && pageStep() === 2) {
     const blank = document.createElement('div'); blank.className = 'blank-page';
@@ -101,6 +101,7 @@ async function render(direction = 0) {
       }
     }
   }, 100);
+  return true;
 }
 async function go(target, direction = 0) {
   if (!pdf || busy || !Number.isFinite(target)) return;
@@ -109,7 +110,7 @@ async function go(target, direction = 0) {
   busy = true;
   const previous = index;
   try {
-    index = next; zoom = 1; updateZoom(); $('stage').scrollTo(0, 0);
+    index = next; updateZoom(); $('stage').scrollTo(0, 0);
     await render(direction);
   } catch (error) {
     console.error(error); index = previous;
@@ -122,6 +123,7 @@ function setContents(open) {
   document.body.classList.toggle('contents-open', open);
   document.querySelector('main').inert = open && phoneQuery.matches;
   document.querySelector('header').inert = open && phoneQuery.matches;
+  $('zoomControls').inert = open && phoneQuery.matches;
   requestAnimationFrame(() => render().catch(console.error));
   if (open) {
     $('closeSide').focus();
@@ -147,18 +149,47 @@ function updateZoom() {
   document.body.classList.toggle('zoomed', zoom > 1);
   $('zoomToggle').setAttribute('aria-pressed', String(zoom > 1));
   $('zoomToggle').querySelector('span').textContent = zoom > 1 ? 'Қалыпты көрініс' : 'Үлкейту';
+  $('zoomControls').hidden = zoom <= 1;
+  $('zoomRange').value = Math.round(zoom * 100);
+  $('zoomValue').textContent = `${Math.round(zoom * 100)}%`;
+  $('zoomOut').disabled = zoom <= 1;
+  $('zoomIn').disabled = zoom >= 4;
+}
+function zoomAnchor(point) {
+  const book = $('book').getBoundingClientRect(), stage = $('stage').getBoundingClientRect();
+  const x = point?.clientX ?? (stage.left + stage.width / 2);
+  const y = point?.clientY ?? (stage.top + stage.height / 2);
+  return {x:(x-book.left)/book.width,y:(y-book.top)/book.height,screenX:x-stage.left,screenY:y-stage.top};
+}
+function positionAnchor(anchor) {
+  if (zoom === 1) { $('stage').scrollTo(0,0); return; }
+  const stage = $('stage'), book = $('book');
+  stage.scrollTo(Math.max(0, book.offsetLeft + anchor.x * book.offsetWidth - anchor.screenX), Math.max(0, book.offsetTop + anchor.y * book.offsetHeight - anchor.screenY));
+}
+function previewZoom(value, anchor) {
+  const previous = zoom;
+  zoom = Math.max(1,Math.min(4,value)); updateZoom();
+  const factor = zoom / previous;
+  $('book').querySelectorAll(':scope > canvas, :scope > .blank-page').forEach(canvas => {
+    canvas.style.width = `${parseFloat(canvas.style.width) * factor}px`;
+    canvas.style.height = `${parseFloat(canvas.style.height) * factor}px`;
+  });
+  const links = $('book').querySelector('.pdf-links');
+  if (links) {
+    const scale = (Number(links.dataset.scale)||1)*factor;
+    links.dataset.scale = scale; links.style.transformOrigin = '0 0'; links.style.transform = `scale(${scale})`;
+  }
+  positionAnchor(anchor);
+}
+async function changeZoom(value, point) {
+  if (!pdf || busy || pinch) return;
+  const anchor = zoom === 1 && !point ? {x:0,y:0,screenX:0,screenY:0} : zoomAnchor(point);
+  previewZoom(value,anchor);
+  try { if (await render()) positionAnchor(anchor); }
+  catch(error) { console.error(error); toast('Үлкейту мүмкін болмады.'); }
 }
 async function toggleZoom(point) {
-  if (!pdf || busy) return;
-  const box = $('book').getBoundingClientRect();
-  const x = point ? (point.clientX - box.left) / box.width : phoneQuery.matches ? 0 : .5;
-  const y = point ? (point.clientY - box.top) / box.height : phoneQuery.matches ? 0 : .3;
-  zoom = zoom === 1 ? (phoneQuery.matches ? 1.7 : 1.6) : 1; updateZoom();
-  try {
-    await render();
-    if (zoom > 1) $('stage').scrollTo(Math.max(0, x * $('book').offsetWidth - $('stage').clientWidth / 2), Math.max(0, y * $('book').offsetHeight - $('stage').clientHeight / 2));
-    else $('stage').scrollTo(0, 0);
-  } catch (error) { console.error(error); toast('Үлкейту мүмкін болмады.'); }
+  await changeZoom(zoom === 1 ? 1.7 : 1,point);
 }
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
@@ -183,6 +214,11 @@ $('pageInput').onchange = async e => { const target = Number(e.target.value); if
 $('pageInput').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); $('pageInput').onchange(e); } };
 $('sideToggle').onclick = () => setContents($('sidebar').hidden); $('closeSide').onclick = () => setContents(false);
 $('zoomToggle').onclick = () => toggleZoom(); $('retry').onclick = loadBook;
+$('zoomOut').onclick = () => changeZoom(zoom-.25);
+$('zoomIn').onclick = () => changeZoom(zoom+.25);
+$('zoomValue').onclick = () => changeZoom(1);
+$('zoomRange').oninput = e => { if (!busy && !pinch) previewZoom(Number(e.target.value)/100,zoomAnchor()); };
+$('zoomRange').onchange = () => changeZoom(zoom);
 document.querySelector('.brand').onclick = e => { e.preventDefault(); go(0); };
 $('fullscreen').onclick = async () => {
   try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); }
@@ -207,16 +243,46 @@ document.addEventListener('pointerdown', preparePageSound, {passive: true});
 window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { if (!busy && !gesture) render().catch(console.error); }, 150); });
 phoneQuery.addEventListener('change', async () => {
   await cancelGesture();
+  pointers.clear(); pinch=null; pan=null;
   zoom = 1; updateZoom();
   if (pdf) index = normalizePage(index);
   setContents(false);
   $('stage').scrollTo(0, 0);
 });
 $('stage').addEventListener('pointerdown', e => {
-  if (!pdf || busy || zoom !== 1 || e.target.closest('.pdf-link') || e.pointerType === 'mouse' && e.button !== 0) return;
+  if (!pdf || busy || e.pointerType === 'mouse' && e.button !== 0) return;
+  if (e.pointerType === 'touch') {
+    pointers.set(e.pointerId,{clientX:e.clientX,clientY:e.clientY});
+    if (pointers.size === 2) {
+      gesture = null; pan = null;
+      if (curl) { curl.canvas.remove(); curl.old.style.visibility = ''; curl = null; }
+      const [a,b] = [...pointers.values()];
+      const center = {clientX:(a.clientX+b.clientX)/2,clientY:(a.clientY+b.clientY)/2};
+      pinch = {distance:Math.max(1,Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY)),zoom,anchor:zoomAnchor(center)};
+      for (const id of pointers.keys()) $('stage').setPointerCapture(id);
+      suppressClickUntil = performance.now()+500;
+      return;
+    }
+  }
+  if (zoom > 1) {
+    if (e.target.closest('.pdf-link')) return;
+    pan = {id:e.pointerId,x:e.clientX,y:e.clientY,left:$('stage').scrollLeft,top:$('stage').scrollTop};
+    $('stage').setPointerCapture(e.pointerId); return;
+  }
+  if (e.target.closest('.pdf-link')) return;
   gesture = {id: e.pointerId, x: e.clientX, y: e.clientY, time: performance.now(), direction: 0};
 });
 $('stage').addEventListener('pointermove', e => {
+  if (pointers.has(e.pointerId)) pointers.set(e.pointerId,{clientX:e.clientX,clientY:e.clientY});
+  if (pinch && pointers.size >= 2) {
+    e.preventDefault(); const [a,b]=[...pointers.values()];
+    previewZoom(pinch.zoom*Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY)/pinch.distance,pinch.anchor); return;
+  }
+  if (pan?.id === e.pointerId) {
+    e.preventDefault(); $('stage').scrollTo(pan.left+pan.x-e.clientX,pan.top+pan.y-e.clientY);
+    if (Math.hypot(e.clientX-pan.x,e.clientY-pan.y)>8) suppressClickUntil=performance.now()+400;
+    return;
+  }
   if (!gesture || gesture.id !== e.pointerId) return;
   const dx = e.clientX - gesture.x, dy = e.clientY - gesture.y;
   if (!gesture.direction) {
@@ -225,7 +291,7 @@ $('stage').addEventListener('pointermove', e => {
     const direction = dx < 0 ? 1 : -1;
     if (direction > 0 && index + pageStep() >= pages.length || direction < 0 && index === 0) { gesture = null; return; }
     gesture.direction = direction; $('stage').setPointerCapture(e.pointerId);
-    if (pageStep() === 2 && !reducedMotion()) curl = makeCurl($('book'), direction, gesture.y);
+    if (!reducedMotion()) curl = makeCurl($('book'), direction, gesture.y);
   }
   e.preventDefault(); gesture.distance = Math.max(0, dx * -gesture.direction);
   if (curl) { curl.dragY = Math.max(-.4, Math.min(.4, dy / curl.height)); paintCurl(curl, Math.min(.88, gesture.distance / curl.width)); }
@@ -235,6 +301,13 @@ async function cancelGesture() {
   if (curl) { busy = true; try { await finishCurl(curl, 0); } finally { curl.old.style.visibility = ''; curl = null; busy = false; } }
 }
 $('stage').addEventListener('pointerup', async e => {
+  pointers.delete(e.pointerId);
+  if (pinch) {
+    const anchor=pinch.anchor; pinch=null; pan=null; gesture=null;
+    suppressClickUntil=performance.now()+500;
+    if (await render()) positionAnchor(anchor); return;
+  }
+  if (pan?.id === e.pointerId) { pan=null; return; }
   if (!gesture || gesture.id !== e.pointerId) return;
   const current = gesture; gesture = null; if (!current.direction) return;
   suppressClickUntil = performance.now() + 400;
@@ -242,6 +315,13 @@ $('stage').addEventListener('pointerup', async e => {
   if (distance > Math.min(85, $('stage').clientWidth * .18) || distance > 28 && distance / elapsed > .35) await go(index + current.direction * pageStep(), current.direction);
   else await cancelGesture();
 });
-$('stage').addEventListener('pointercancel', cancelGesture);
+$('stage').addEventListener('pointercancel', async e => {
+  pointers.delete(e.pointerId); pinch=null; pan=null; await cancelGesture();
+  if (pdf) await render();
+});
+$('stage').addEventListener('click', e => { if (performance.now()<suppressClickUntil) { e.preventDefault(); e.stopPropagation(); } },true);
+$('stage').addEventListener('wheel', e => {
+  if (e.ctrlKey) { e.preventDefault(); changeZoom(zoom*Math.exp(-e.deltaY*.002),e); }
+},{passive:false});
 $('stage').addEventListener('dblclick', e => { if (!e.target.closest('.pdf-link') && performance.now() > suppressClickUntil) toggleZoom(e); });
 loadBook();
