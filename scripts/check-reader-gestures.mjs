@@ -9,6 +9,7 @@ function element(id) {
   if (!elements.has(id)) elements.set(id,{
     style:{},dataset:{},classList:classes(),hidden:false,value:'',textContent:'',
     clientWidth:390,clientHeight:673,scrollLeft:0,scrollTop:0,offsetLeft:12,offsetTop:12,
+    children:[],append(...children){this.children.push(...children);},remove(){this.removed=true;},
     querySelector:()=>element('span'),querySelectorAll:()=>[],setAttribute(){},
     addEventListener(type,fn){listeners.set(`${id}:${type}`,fn);},setPointerCapture(){},
     getBoundingClientRect(){return {left:0,top:0,width:390,height:673};},
@@ -27,18 +28,21 @@ book.getBoundingClientRect=()=>({left:12-element('stage').scrollLeft,top:12-elem
 const context=vm.createContext({
   console,performance,Map,Math,Number,Promise,setTimeout,clearTimeout,
   innerWidth:390,devicePixelRatio:1,
-  matchMedia:()=>({matches:true,addEventListener(){}}),
-  document:{getElementById:element,querySelector:element,querySelectorAll:()=>[],body:{classList:classes()},addEventListener(){}},
+  matchMedia:query=>({matches:!query.includes('prefers-reduced-motion'),addEventListener(){}}),
+  document:{getElementById:element,querySelector:element,querySelectorAll:()=>[],createElement:()=>element(`created-${elements.size}`),body:{classList:classes()},addEventListener(){}},
   window:{addEventListener(){}},
   localStorage:{setItem(){},getItem(){return '0';}},
   pdfjs:{GlobalWorkerOptions:{}},
   preparePageSound(){},prepareCurl(){},playPageSound(){},
+  makeCurl:()=>({canvas:{isConnected:true,remove(){}},old:canvas,width:366,height:518.5,progress:0}),
+  paintCurl:(sheet,progress)=>{sheet.progress=progress;},
+  finishCurl:async sheet=>{sheet.canvas.remove();},
   requestAnimationFrame:fn=>fn(),
 });
 const source=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8')
   .replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify('http://localhost/app.js')).replace(/loadBook\(\);\s*$/,'');
 vm.runInContext(source,context);
-vm.runInContext('pdf={}; profile={width:480,height:680}; pages=Array.from({length:215},(_,i)=>({source:i+1})); render=async()=>true;',context);
+vm.runInContext('pdf={}; profile={width:480,height:680}; pages=Array.from({length:215},(_,i)=>({source:i+1,width:480,height:680})); render=async()=>true;',context);
 const pointer=(id,x,y)=>({pointerId:id,pointerType:'touch',clientX:x,clientY:y,button:0,target:{closest:()=>null},preventDefault(){}});
 const dispatch=(type,event)=>listeners.get(`stage:${type}`)(event);
 dispatch('pointerdown',pointer(1,100,200));
@@ -62,4 +66,20 @@ dispatch('pointermove',pointer(5,300,200));
 assert.equal(vm.runInContext('zoom',context),4,'pinch zoom is capped at 400%');
 await dispatch('pointercancel',pointer(5,300,200));
 assert.equal(vm.runInContext('pinch',context),null);
-console.log('PASS: pinch, pan, zoom limit, pointer cleanup; no accidental page turn.');
+vm.runInContext('pointers.clear(); zoom=1; index=0; canvasFor=async()=>document.createElement("canvas");',context);
+dispatch('pointerdown',pointer(6,250,200));
+dispatch('pointermove',pointer(6,200,200));
+await new Promise(setImmediate);
+assert.equal(vm.runInContext('curl.preview.children[0].dataset.previewPage',context),2,'next phone page appears while the pointer is still held');
+assert.equal(canvas.style.visibility,'hidden','stationary old page must not show below the curl');
+await vm.runInContext('cancelGesture()',context);
+assert.equal(canvas.style.visibility,'','cancel restores the current page');
+assert.equal(vm.runInContext('index',context),0);
+vm.runInContext('pointers.clear(); phoneQuery.matches=false; index=4;',context);
+dispatch('pointerdown',pointer(7,100,200));
+dispatch('pointermove',pointer(7,150,200));
+await new Promise(setImmediate);
+assert.deepEqual(vm.runInContext('Array.from(curl.preview.children,p=>p.dataset.previewPage).join(",")',context),'3,4','previous desktop spread appears during a reverse drag');
+await vm.runInContext('cancelGesture()',context);
+assert.equal(canvas.style.visibility,'');
+console.log('PASS: pinch, pan, zoom limit, next-page preview, reverse spread, cancellation.');

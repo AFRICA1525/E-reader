@@ -65,6 +65,39 @@ function updateNavigation(entries) {
   });
   savePosition();
 }
+function restoreTurnPreview(sheet) {
+  if (!sheet) return;
+  sheet.cancelled = true;
+  sheet.preview?.remove();
+  sheet.hiddenPages?.forEach(page => { page.style.visibility = ''; });
+  if (sheet.links) sheet.links.style.visibility = '';
+}
+async function showTurnPreview(sheet, target) {
+  if (!sheet) return;
+  const {entries,scale,ratio}=layout(target);
+  try {
+    const canvases=await Promise.all(entries.map(async entry => {
+      const canvas=await canvasFor(entry,Math.min(2600,entry.width*scale*ratio));
+      canvas.style.width=`${entry.width*scale}px`; canvas.style.height=`${entry.height*scale}px`;
+      canvas.dataset.previewPage=entry.source;
+      return canvas;
+    }));
+    if (curl!==sheet || sheet.cancelled || !sheet.canvas.isConnected) return;
+    const preview=document.createElement('div'); preview.className='turn-preview'; preview.setAttribute('aria-hidden','true');
+    preview.append(...canvases);
+    if (canvases.length===1 && pageStep()===2) {
+      const blank=document.createElement('div');
+      blank.style.cssText=`width:${profile.width*scale}px;height:${profile.height*scale}px;background:#fbf9f3`;
+      preview.append(blank);
+    }
+    sheet.preview=preview; sheet.hiddenPages=[...$('book').querySelectorAll(':scope > canvas:not(.curl-sheet)')];
+    sheet.links=$('book').querySelector('.pdf-links');
+    $('book').append(preview);
+    sheet.hiddenPages.forEach(page=>{page.style.visibility='hidden';});
+    if (sheet.links) sheet.links.style.visibility='hidden';
+    paintCurl(sheet,sheet.progress);
+  } catch(error) { console.error(error); }
+}
 async function render(direction = 0) {
   if (!pdf) return;
   const version = ++renderVersion, book = $('book'), {entries, scale, ratio} = layout();
@@ -77,7 +110,9 @@ async function render(direction = 0) {
   }));
   if (version !== renderVersion) return;
   let turning = curl;
+  if (turning) turning.cancelled = true; // Ignore a late gesture preview once the final pages are installed.
   if (direction && !reducedMotion() && zoom === 1 && !turning) turning = makeCurl(book, direction);
+  if (turning) paintCurl(turning,turning.progress);
   book.replaceChildren(...canvases);
   if (canvases.length === 1 && pageStep() === 2) {
     const blank = document.createElement('div'); blank.className = 'blank-page';
@@ -255,7 +290,7 @@ $('stage').addEventListener('pointerdown', e => {
     pointers.set(e.pointerId,{clientX:e.clientX,clientY:e.clientY});
     if (pointers.size === 2) {
       gesture = null; pan = null;
-      if (curl) { curl.canvas.remove(); curl.old.style.visibility = ''; curl = null; }
+      if (curl) { restoreTurnPreview(curl); curl.canvas.remove(); curl.old.style.visibility = ''; curl = null; }
       const [a,b] = [...pointers.values()];
       const center = {clientX:(a.clientX+b.clientX)/2,clientY:(a.clientY+b.clientY)/2};
       pinch = {distance:Math.max(1,Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY)),zoom,anchor:zoomAnchor(center)};
@@ -291,14 +326,21 @@ $('stage').addEventListener('pointermove', e => {
     const direction = dx < 0 ? 1 : -1;
     if (direction > 0 && index + pageStep() >= pages.length || direction < 0 && index === 0) { gesture = null; return; }
     gesture.direction = direction; $('stage').setPointerCapture(e.pointerId);
-    if (!reducedMotion()) curl = makeCurl($('book'), direction, gesture.y);
+    if (!reducedMotion()) {
+      curl = makeCurl($('book'), direction, gesture.y);
+      showTurnPreview(curl,index+direction*pageStep());
+    }
   }
   e.preventDefault(); gesture.distance = Math.max(0, dx * -gesture.direction);
   if (curl) { curl.dragY = Math.max(-.4, Math.min(.4, dy / curl.height)); paintCurl(curl, Math.min(.88, gesture.distance / curl.width)); }
 });
 async function cancelGesture() {
   gesture = null;
-  if (curl) { busy = true; try { await finishCurl(curl, 0); } finally { curl.old.style.visibility = ''; curl = null; busy = false; } }
+  if (curl) {
+    const sheet=curl; sheet.cancelled=true; busy=true;
+    try { await finishCurl(sheet,0); }
+    finally { restoreTurnPreview(sheet); sheet.old.style.visibility=''; curl=null; busy=false; }
+  }
 }
 $('stage').addEventListener('pointerup', async e => {
   pointers.delete(e.pointerId);
