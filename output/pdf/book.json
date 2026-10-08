@@ -1,12 +1,12 @@
 {
   "version": 3,
-  "revision": "20261008-newpages",
+  "revision": "20261008-spreads12",
   "edition": 2026,
   "title": "Java тілінде объектіге бағытталған бағдарламалау",
   "pdf": "./output/pdf/java-reader.pdf",
   "width": 480,
   "height": 680,
-  "pageCount": 208,
+  "pageCount": 236,
   "contents": [
     {
       "title": "Алғы сөз",
@@ -42,301 +42,301 @@
       "title": "Дәріс 2. Тілдің негіздері, мәліметтер түрлері және өңдеу ортасы",
       "key": "lecture-2",
       "depth": 1,
-      "page": 14
+      "page": 15
     },
     {
       "title": "Дәріс 3. Мәліметтерді енгізу және шығару",
       "key": "lecture-3",
       "depth": 1,
-      "page": 21
+      "page": 23
     },
     {
       "title": "Дәріс 4. Базалық математикалық операциялар және есептеулер",
       "key": "lecture-4",
       "depth": 1,
-      "page": 25
+      "page": 27
     },
     {
       "title": "Дәріс 5. Шартты оператор: if",
       "key": "lecture-5",
       "depth": 1,
-      "page": 35
+      "page": 38
     },
     {
       "title": "Дәріс 6. Циклдік операторлар: for және while",
       "key": "lecture-6",
       "depth": 1,
-      "page": 39
+      "page": 42
     },
     {
       "title": "Дәріс 7. Тізімдер",
       "key": "lecture-7",
       "depth": 1,
-      "page": 46
+      "page": 49
     },
     {
       "title": "Дәріс 8. Рекурсия және екі өлшемді массивтер",
       "key": "lecture-8",
       "depth": 1,
-      "page": 50
+      "page": 54
     },
     {
       "title": "Дәріс 9. Функцияны хабарлау. Жиындар",
       "key": "lecture-9",
       "depth": 1,
-      "page": 55
+      "page": 59
     },
     {
       "title": "Дәріс 10. Сөздіктер",
       "key": "lecture-10",
       "depth": 1,
-      "page": 60
+      "page": 65
     },
     {
       "title": "Дәріс 11. Объектіге бағытталған бағдарламалауға кіріспе",
       "key": "lecture-11",
       "depth": 1,
-      "page": 64
+      "page": 69
     },
     {
       "title": "Дәріс 12. Модульдер",
       "key": "lecture-12",
       "depth": 1,
-      "page": 69
+      "page": 75
     },
     {
       "title": "Дәріс 13. Mathlab тәрізді және өзге кітапханаларды пайдалану",
       "key": "lecture-13",
       "depth": 1,
-      "page": 75
+      "page": 81
     },
     {
       "title": "Дәріс 14. Қателерді талдау: throwExceptions",
       "key": "lecture-14",
       "depth": 1,
-      "page": 85
+      "page": 92
     },
     {
       "title": "Дәріс 15. Ерекше жағдайларды өңдеу және бағдарламаның тұрақтылығы",
       "key": "lecture-15",
       "depth": 1,
-      "page": 92
+      "page": 99
     },
     {
       "title": "Практикалық бөлім",
       "key": "practice",
       "depth": 0,
-      "page": 95
+      "page": 102
     },
     {
       "title": "Зертханалық жұмыс №1",
       "key": "lab-1",
       "depth": 1,
-      "page": 97
+      "page": 104
     },
     {
       "title": "Зертханалық жұмыс №2",
       "key": "lab-2",
       "depth": 1,
-      "page": 102
+      "page": 109
     },
     {
       "title": "Зертханалық жұмыс №3",
       "key": "lab-3",
       "depth": 1,
-      "page": 104
+      "page": 111
     },
     {
       "title": "Зертханалық жұмыс №4",
       "key": "lab-4",
       "depth": 1,
-      "page": 107
+      "page": 115
     },
     {
       "title": "Зертханалық жұмыс №5-6",
       "key": "lab-5-6",
       "depth": 1,
-      "page": 112
+      "page": 121
     },
     {
       "title": "Зертханалық жұмыс №7",
       "key": "lab-7",
       "depth": 1,
-      "page": 119
+      "page": 128
     },
     {
       "title": "Зертханалық жұмыс №8",
       "key": "lab-8",
       "depth": 1,
-      "page": 125
+      "page": 135
     },
     {
       "title": "Зертханалық жұмыс №9",
       "key": "lab-9",
       "depth": 1,
-      "page": 129
+      "page": 140
     },
     {
       "title": "Зертханалық жұмыс №10",
       "key": "lab-10",
       "depth": 1,
-      "page": 135
+      "page": 147
     },
     {
       "title": "Зертханалық жұмыс №11",
       "key": "lab-11",
       "depth": 1,
-      "page": 139
+      "page": 151
     },
     {
       "title": "Зертханалық жұмыс №12",
       "key": "lab-12",
       "depth": 1,
-      "page": 141
+      "page": 154
     },
     {
       "title": "Зертханалық жұмыс №13",
       "key": "lab-13",
       "depth": 1,
-      "page": 156
+      "page": 171
     },
     {
       "title": "Зертханалық жұмыс №14",
       "key": "lab-14",
       "depth": 1,
-      "page": 161
+      "page": 176
     },
     {
       "title": "Зертханалық жұмыс №15",
       "key": "lab-15",
       "depth": 1,
-      "page": 166
+      "page": 182
     },
     {
       "title": "Білімді тексеру материалдары",
       "key": "assessment",
       "depth": 0,
-      "page": 170
+      "page": 187
     },
     {
       "title": "1–10. Java тілі және бағдарламалау ортасы",
       "key": "test-group-1",
       "depth": 1,
-      "page": 171
+      "page": 188
     },
     {
       "title": "11–20. Мәліметтер типтері және айнымалылар",
       "key": "test-group-2",
       "depth": 1,
-      "page": 173
+      "page": 191
     },
     {
       "title": "21–30. Мәліметтерді енгізу және шығару",
       "key": "test-group-3",
       "depth": 1,
-      "page": 175
+      "page": 194
     },
     {
       "title": "31–40. Операторлар және математикалық есептеулер",
       "key": "test-group-4",
       "depth": 1,
-      "page": 177
+      "page": 197
     },
     {
       "title": "41–50. Шартты операторлар",
       "key": "test-group-5",
       "depth": 1,
-      "page": 179
+      "page": 200
     },
     {
       "title": "51–60. Циклдік операторлар",
       "key": "test-group-6",
       "depth": 1,
-      "page": 181
+      "page": 203
     },
     {
       "title": "61–70. Массивтер және рекурсия",
       "key": "test-group-7",
       "depth": 1,
-      "page": 183
+      "page": 206
     },
     {
       "title": "71–80. Әдістер, тізімдер, жиындар және сөздіктер",
       "key": "test-group-8",
       "depth": 1,
-      "page": 185
+      "page": 209
     },
     {
       "title": "81–90. Объектіге бағытталған бағдарламалау",
       "key": "test-group-9",
       "depth": 1,
-      "page": 187
+      "page": 212
     },
     {
       "title": "91–100. Пакеттер, кітапханалар және ерекшеліктерді өңдеу",
       "key": "test-group-10",
       "depth": 1,
-      "page": 189
+      "page": 215
     },
     {
       "title": "Тест тапсырмаларының жауап кілті",
       "key": "answer-key",
       "depth": 1,
-      "page": 191
+      "page": 218
     },
     {
       "title": "Глоссарий",
       "key": "glossary",
       "depth": 0,
-      "page": 192
+      "page": 219
     },
     {
       "title": "Қорытынды",
       "key": "conclusion",
       "depth": 0,
-      "page": 196
+      "page": 224
     },
     {
       "title": "Пайдаланылған әдебиеттер тізімі",
       "key": "references",
       "depth": 0,
-      "page": 198
+      "page": 226
     },
     {
       "title": "Қосымшалар",
       "key": "appendices",
       "depth": 0,
-      "page": 203
+      "page": 231
     },
     {
       "title": "A. Консольдік енгізу және есептеу",
       "key": "appendix-a",
       "depth": 1,
-      "page": 204
+      "page": 232
     },
     {
       "title": "B. Рекурсия және матрица",
       "key": "appendix-b",
       "depth": 1,
-      "page": 205
+      "page": 233
     },
     {
       "title": "C. Жолдар және коллекциялар",
       "key": "appendix-c",
       "depth": 1,
-      "page": 206
+      "page": 234
     },
     {
       "title": "D. Объект және конструктор",
       "key": "appendix-d",
       "depth": 1,
-      "page": 207
+      "page": 235
     },
     {
       "title": "E. №15 жұмысқа тексеру хаттамасы",
       "key": "appendix-e",
       "depth": 1,
-      "page": 208
+      "page": 236
     }
   ],
   "videos": [
@@ -1691,6 +1691,174 @@
     },
     {
       "page": 208,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 209,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 210,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 211,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 212,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 213,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 214,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 215,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 216,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 217,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 218,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 219,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 220,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 221,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 222,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 223,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 224,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 225,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 226,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 227,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 228,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 229,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 230,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 231,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 232,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 233,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 234,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 235,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 236,
       "kind": "page",
       "width": 480,
       "height": 680

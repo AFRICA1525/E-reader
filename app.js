@@ -12,8 +12,12 @@ const pointers = new Map();
 const cache = new Map(), pending = new Map();
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const phoneQuery = matchMedia('(max-width: 760px), (max-width: 1000px) and (max-height: 600px)');
-const pageStep = () => phoneQuery.matches ? 1 : 2;
-const normalizePage = target => Math.floor(Math.max(0, Math.min(pages.length - 1, target)) / pageStep()) * pageStep();
+const pageStep = (i = index) => i === 0 ? 1 : 2;
+const adjacentPage = (direction, i = index) => direction > 0 ? i + pageStep(i) : i <= 1 ? 0 : i - 2;
+const normalizePage = target => {
+  const clamped = Math.max(0, Math.min(pages.length - 1, target));
+  return clamped === 0 ? 0 : 1 + Math.floor((clamped - 1) / 2) * 2;
+};
 const positionKey = 'java-textbook:2026:position';
 function toast(message) {
   $('toast').textContent = message; $('toast').classList.add('show');
@@ -22,7 +26,7 @@ function toast(message) {
 function sound() { if (!reducedMotion()) playPageSound(); }
 function savePosition() { try { localStorage.setItem(positionKey, String(index)); } catch {} }
 function layout(i = index) {
-  const count = pageStep(), entries = pages.slice(i, i + count), stage = $('stage');
+  const count = pageStep(i), entries = pages.slice(i, i + count), stage = $('stage');
   const width = Math.max(80, stage.clientWidth - (count === 1 ? 24 : 60));
   const height = Math.max(80, stage.clientHeight - 40);
   const scale = Math.min(width / (profile.width * count), height / profile.height) * zoom;
@@ -54,7 +58,7 @@ function updateNavigation(entries) {
   $('prev').disabled = index === 0; $('next').disabled = index + pageStep() >= pages.length;
   $('prev').setAttribute('aria-label', pageStep() === 1 ? 'Алдыңғы бет' : 'Алдыңғы екі бет');
   $('next').setAttribute('aria-label', pageStep() === 1 ? 'Келесі бет' : 'Келесі екі бет');
-  document.querySelector('.reading-hint').textContent = pageStep() === 1 ? 'Бір бет · ыңғайлы оқу' : 'Екі бет · бір кітап';
+  document.querySelector('.reading-hint').textContent = pageStep() === 1 ? 'Мұқаба · бір бет' : 'Екі бет · бір кітап';
   $('progressFill').style.width = `${(index + entries.length) / pages.length * 100}%`;
   const current = [...profile.contents].reverse().find(item => item.page <= index + entries.length);
   $('chapterLabel').textContent = current?.title || profile.title;
@@ -85,7 +89,7 @@ async function showTurnPreview(sheet, target) {
     if (curl!==sheet || sheet.cancelled || !sheet.canvas.isConnected) return;
     const preview=document.createElement('div'); preview.className='turn-preview'; preview.setAttribute('aria-hidden','true');
     preview.append(...canvases);
-    if (canvases.length===1 && pageStep()===2) {
+    if (canvases.length===1 && pageStep(target)===2) {
       const blank=document.createElement('div');
       blank.style.cssText=`width:${profile.width*scale}px;height:${profile.height*scale}px;background:#fbf9f3`;
       preview.append(blank);
@@ -127,7 +131,7 @@ async function render(direction = 0) {
   clearTimeout(warmTimer);
   warmTimer = setTimeout(async () => {
     prepareCurl();
-    for (const target of [index + pageStep(), index - pageStep()]) {
+    for (const target of [adjacentPage(1), adjacentPage(-1)]) {
       if (version !== renderVersion || target < 0 || target >= pages.length) continue;
       const next = layout(target);
       for (const entry of next.entries) {
@@ -229,7 +233,7 @@ async function toggleZoom(point) {
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
   try {
-    const response = await fetch(new URL('./output/pdf/book.json?v=20261008-newpages', import.meta.url));
+    const response = await fetch(new URL('./output/pdf/book.json?v=20261008-spreads12', import.meta.url));
     if (!response.ok) throw Error('Кітап мазмұны табылмады.');
     profile = await response.json();
     const pdfURL = new URL(profile.pdf, import.meta.url);
@@ -246,7 +250,7 @@ async function loadBook() {
     $('error').hidden = false;
   } finally { $('loading').hidden = true; }
 }
-$('prev').onclick = () => go(index - pageStep(), -1); $('next').onclick = () => go(index + pageStep(), 1);
+$('prev').onclick = () => go(adjacentPage(-1), -1); $('next').onclick = () => go(adjacentPage(1), 1);
 $('pageInput').onchange = async e => { const target = Number(e.target.value); if (target >= 1) await go(target - 1); e.target.value = index + 1; };
 $('pageInput').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); $('pageInput').onchange(e); } };
 $('sideToggle').onclick = () => setContents($('sidebar').hidden); $('closeSide').onclick = () => setContents(false);
@@ -269,8 +273,8 @@ document.addEventListener('keydown', e => {
     if (e.shiftKey && e.target === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && e.target === last) { e.preventDefault(); first.focus(); }
   }
-  if (e.key === 'ArrowRight') { e.preventDefault(); go(index + pageStep(), 1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - pageStep(), -1); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); go(adjacentPage(1), 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(adjacentPage(-1), -1); }
   if (e.key === 'Home') { e.preventDefault(); go(0); }
   if (e.key === 'End') { e.preventDefault(); go(pages.length - 1); }
   if (e.key.toLowerCase() === 'f') $('fullscreen').click();
@@ -330,7 +334,7 @@ $('stage').addEventListener('pointermove', e => {
     gesture.direction = direction; $('stage').setPointerCapture(e.pointerId);
     if (!reducedMotion()) {
       curl = makeCurl($('book'), direction, gesture.y);
-      showTurnPreview(curl,index+direction*pageStep());
+      showTurnPreview(curl,adjacentPage(direction));
     }
   }
   e.preventDefault(); gesture.distance = Math.max(0, dx * -gesture.direction);
@@ -356,7 +360,7 @@ $('stage').addEventListener('pointerup', async e => {
   const current = gesture; gesture = null; if (!current.direction) return;
   suppressClickUntil = performance.now() + 400;
   const distance = current.distance || 0, elapsed = Math.max(1, performance.now() - current.time);
-  if (distance > Math.min(85, $('stage').clientWidth * .18) || distance > 28 && distance / elapsed > .35) await go(index + current.direction * pageStep(), current.direction);
+  if (distance > Math.min(85, $('stage').clientWidth * .18) || distance > 28 && distance / elapsed > .35) await go(adjacentPage(current.direction), current.direction);
   else await cancelGesture();
 });
 $('stage').addEventListener('pointercancel', async e => {

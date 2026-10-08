@@ -14,6 +14,7 @@ import pdfplumber, pypdfium2
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import colors
+from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph,
     Spacer, PageBreak, KeepTogether, Flowable, Image, Table, TableStyle)
@@ -26,7 +27,7 @@ OUT = ROOT/'output/pdf'; TMP = ROOT/'tmp/pdfs'
 OUT.mkdir(parents=True,exist_ok=True); (TMP/'figures').mkdir(parents=True,exist_ok=True)
 SOURCE = next(ROOT.glob('*.pdf'))
 NEW = ROOT/'NewPages'
-REVISION = '20261008-newpages'
+REVISION = '20261008-spreads12'
 
 def document_paragraphs(name):
     return [p.text.strip() for p in Document(NEW/name).paragraphs if p.text.strip()]
@@ -61,13 +62,13 @@ for name,file in [('Body','times.ttf'),('BodyBold','timesbd.ttf'),('Sans','arial
 pdfmetrics.registerFontFamily('Body',normal='Body',bold='BodyBold',italic='Body',boldItalic='BodyBold')
 pdfmetrics.registerFontFamily('Sans',normal='Sans',bold='SansBold',italic='Sans',boldItalic='SansBold')
 styles = {
- 'body':ParagraphStyle('body',fontName='Body',fontSize=11,leading=15.5,textColor=colors.HexColor('#263b36'),spaceAfter=7,allowWidows=0,allowOrphans=0),
+ 'body':ParagraphStyle('body',fontName='Body',fontSize=12,leading=17,alignment=TA_JUSTIFY,textColor=colors.HexColor('#263b36'),spaceAfter=7,allowWidows=0,allowOrphans=0),
  'h':ParagraphStyle('h',fontName='SansBold',fontSize=13,leading=18,textColor=INK,spaceBefore=14,spaceAfter=8,keepWithNext=True),
  'title':ParagraphStyle('title',fontName='SansBold',fontSize=25,leading=31,textColor=INK,spaceAfter=15,keepWithNext=True),
  'eyebrow':ParagraphStyle('eyebrow',fontName='SansBold',fontSize=8,leading=12,textColor=GOLD,spaceAfter=12,keepWithNext=True),
  'small':ParagraphStyle('small',fontName='Sans',fontSize=8,leading=11.5,textColor=MUTED,spaceAfter=6),
  'note':ParagraphStyle('note',fontName='Sans',fontSize=9,leading=13.5,textColor=INK,backColor=colors.HexColor('#edf0e6'),borderPadding=10,spaceBefore=7,spaceAfter=17),
- 'question':ParagraphStyle('question',fontName='Sans',fontSize=9.2,leading=12.8,textColor=INK,spaceAfter=3),
+ 'question':ParagraphStyle('question',fontName='Sans',fontSize=12,leading=16.5,alignment=TA_JUSTIFY,textColor=INK,spaceAfter=3),
  'caption':ParagraphStyle('caption',fontName='Sans',fontSize=6.6,leading=8.8,textColor=MUTED,spaceAfter=7),
  'code':ParagraphStyle('code',fontName='Code',fontSize=8.1,leading=11.4,textColor=INK,backColor=colors.HexColor('#f0f1e9'),borderPadding=8,spaceBefore=5,spaceAfter=8,splitLongWords=1),
  'cell':ParagraphStyle('cell',fontName='Sans',fontSize=8.1,leading=11.3,textColor=INK,spaceAfter=0),

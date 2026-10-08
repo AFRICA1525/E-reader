@@ -43,6 +43,17 @@ const source=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8')
   .replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify('http://localhost/app.js')).replace(/loadBook\(\);\s*$/,'');
 vm.runInContext(source,context);
 vm.runInContext('pdf={}; profile={width:480,height:680}; pages=Array.from({length:215},(_,i)=>({source:i+1,width:480,height:680})); render=async()=>true;',context);
+assert.equal(vm.runInContext('layout(0).entries.length',context),1,'cover must stand alone on a phone');
+assert.equal(vm.runInContext('layout(1).entries.length',context),2,'pages after the cover form a spread');
+assert.equal(vm.runInContext('adjacentPage(1,0)',context),1);
+assert.equal(vm.runInContext('adjacentPage(-1,1)',context),0);
+assert.equal(vm.runInContext('adjacentPage(1,1)',context),3);
+assert.equal(vm.runInContext('adjacentPage(-1,3)',context),1);
+assert.equal(vm.runInContext('normalizePage(2)',context),1,'page three belongs to the first spread');
+vm.runInContext('phoneQuery.matches=false',context);
+assert.equal(vm.runInContext('layout(0).entries.length',context),1,'cover must stand alone on a desktop');
+assert.equal(vm.runInContext('layout(1).entries.length',context),2);
+vm.runInContext('phoneQuery.matches=true',context);
 const pointer=(id,x,y)=>({pointerId:id,pointerType:'touch',clientX:x,clientY:y,button:0,target:{closest:()=>null},preventDefault(){}});
 const dispatch=(type,event)=>listeners.get(`stage:${type}`)(event);
 dispatch('pointerdown',pointer(1,100,200));
