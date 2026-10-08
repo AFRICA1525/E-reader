@@ -5,6 +5,7 @@ pages in half. This preserves long code lines crossing the original gutter.
 Tables are re-typeset; source figures are rendered in full, never half-cropped.
 """
 from pathlib import Path
+from docx import Document
 from xml.sax.saxutils import escape
 import json, re, sys, textwrap
 from collections import Counter
@@ -17,13 +18,40 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph,
     Spacer, PageBreak, KeepTogether, Flowable, Image, Table, TableStyle)
 from reportlab.platypus.tableofcontents import TableOfContents
-from book_content import TITLES, QUESTIONS, LECTURE15, OUTCOMES, GLOSSARY
+from book_content import TITLES, LECTURE15, OUTCOMES, GLOSSARY
 
 sys.stdout.reconfigure(encoding='utf-8')
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'output/pdf'; TMP = ROOT/'tmp/pdfs'
 OUT.mkdir(parents=True,exist_ok=True); (TMP/'figures').mkdir(parents=True,exist_ok=True)
 SOURCE = next(ROOT.glob('*.pdf'))
+NEW = ROOT/'NewPages'
+REVISION = '20261008-newpages'
+
+def document_paragraphs(name):
+    return [p.text.strip() for p in Document(NEW/name).paragraphs if p.text.strip()]
+
+front = document_paragraphs('Бастапқы беті 1-3.docx')
+FOREWORD = front[front.index('АЛҒЫ СӨЗ')+1:front.index('МАЗМҰНЫ')]
+CONCLUSION = document_paragraphs('ҚОРЫТЫНДЫ.docx')[1:]
+REFERENCES = document_paragraphs('ПАЙДАЛАНЫЛҒАН ӘДЕБИЕТТЕР.docx')[1:]
+test_document = Document(NEW/'Тест тапсырмалар.docx')
+TEST_GROUPS = []
+for p in test_document.paragraphs:
+    text=p.text.strip()
+    if re.match(r'^\d+[–-]\d+\.',text):
+        TEST_GROUPS.append({'title':text,'questions':[]})
+    elif re.match(r'^\d+\.\s',text):
+        parts=re.split(r'\n(?=[ABCD]\))',text)
+        number=int(re.match(r'\d+',parts[0]).group())
+        assert len(parts)==5,(number,parts)
+        TEST_GROUPS[-1]['questions'].append({'number':number,'question':re.sub(r'^\d+\.\s*','',parts[0]),'options':[s.strip() for s in parts[1:]]})
+ANSWER_KEY={}
+for row in test_document.tables[0].rows[1:]:
+    cells=[c.text.strip() for c in row.cells]
+    for j in range(0,len(cells),2): ANSWER_KEY[int(cells[j])]=cells[j+1]
+assert len(TEST_GROUPS)==10 and sum(len(g['questions']) for g in TEST_GROUPS)==100
+assert set(ANSWER_KEY)==set(range(1,101))
 W,H = 480,680; M = 48; CW = W-2*M
 INK=colors.HexColor('#183e3c'); GOLD=colors.HexColor('#ad8747')
 PAPER=colors.HexColor('#fbf9f3'); MUTED=colors.HexColor('#72817b')
@@ -74,22 +102,7 @@ class Cover(Flowable):
     def __init__(self): super().__init__(); self.width=CW; self.height=540
     def draw(self):
         c=self.canv
-        c.saveState(); c.setFillColor(INK); c.rect(-M,-85,W,H,fill=1,stroke=0)
-        c.setStrokeColor(colors.HexColor('#41615b')); c.setLineWidth(.5)
-        for i in range(7):
-            c.roundRect(205+i*13,90+i*13,200,200,24,fill=0,stroke=1)
-        c.setFillColor(GOLD); c.setFont('SansBold',8); c.drawString(0,502,'ЭЛЕКТРОНДЫ ОҚУ ҚҰРАЛЫ')
-        c.setFillColor(PAPER); c.setFont('SansBold',92); c.drawString(-5,378,'JAVA')
-        c.setFillColor(GOLD); c.circle(318,393,7,fill=1,stroke=0)
-        c.setFillColor(PAPER); c.setFont('Sans',24)
-        for y,s in [(329,'тілінде объектіге'),(296,'бағытталған'),(263,'бағдарламалау')]: c.drawString(0,y,s)
-        c.setStrokeColor(GOLD); c.line(0,227,65,227)
-        c.setFont('Sans',10); c.setFillColor(colors.HexColor('#c4d0c5'))
-        c.drawString(0,188,'15 дәріс · практикалық жұмыстар')
-        c.drawString(0,169,'білімді бақылау · қазақша видеосабақтар')
-        c.setFillColor(PAPER); c.setFont('Sans',11); c.drawString(0,57,'Найзағараева А. А.')
-        c.setFont('Sans',8); c.setFillColor(colors.HexColor('#c4d0c5')); c.drawString(0,20,'АСТАНА  /  2026')
-        c.restoreState()
+        c.drawImage(str(NEW/'Обновлённая обложка учебника по Java.png'),-M,-84,width=W,height=H)
 
 class Heading(Paragraph):
     def __init__(self,title,key,depth=0,url=None,kicker=None):
@@ -338,17 +351,9 @@ for n in lectures:SOURCE_STATS['lectureChars'][n]=sum(map(len,lectures[n]))
 for n in labs:SOURCE_STATS['labChars'][n]=sum(map(len,labs[n]))
 
 story.append(Cover())
-section('Оқу құралы туралы','about',kicker='01 / БАСЫЛЫМ')
-addp('Найзағараева А. А. (дайындаған). Java тілінде объектіге бағытталған бағдарламалау. Электронды оқу құралы. Астана, 2026.')
-addp('Оқу құралы 6В06101 «Бағдарламалық инженерия» және 6В06102 «Цифрлық агрожүйелер мен кешендер» білім беру бағдарламаларының студенттеріне арналған. Дәрістер, зертханалық жұмыстар, қазақша видеосабақтарға сілтемелер және өзіндік жұмысты бағалауға арналған материалдар бір кітапқа біріктірілген.')
-sub('Оқу бағыты')
-addp('Дәрісті оқыңыз, тақырып атауын басып видеосабақты ашыңыз, практикалық жұмысты орындаңыз, содан кейін «Білімді бақылау» бөлімінде біліміңізді тексеріңіз. Мазмұндағы әр жол тиісті бөлімге апарады.')
-addp('Бұл басылымда бастапқы 14 дәріс пен практикалық бөлім қайта беттелді. №15 зертханалық жұмыс негізінде 15-дәріс қосылды. Жаңа оқу нәтижелері, бақылау сұрақтары, глоссарий, қорытынды және Java кодтарының қосымшалары дайындалды. Бастапқы мәтіндегі басқа тілдер мысалдары тиісті түсіндірмемен берілген.','small')
-section('Пәннің мақсаты мен міндеттері','purpose',kicker='02 / ОҚУ БАҒЫТЫ')
-addp('Пәннің мақсаты — ақпарат өңдеуге арналған алгоритмдерді құру, оларды Java тілінде іске асыру және объектіге бағытталған бағдарламалаудың негізгі тәсілдерін меңгеру.')
-for s in ['Мәлімет типтерін, операторларды, әдістерді және деректер құрылымдарын орынды қолдану.','Практикалық есепті кіріс деректер, алгоритм және тексерілетін нәтиже түрінде тұжырымдау.','Объекттерді модельдеп, кодты түсінікті класстар мен пакеттерге бөлу.','Есептеу және графикалық құралдарды пайдалану; ерекше жағдайларды талдау.','Өз шешімін түсіндіру, шекаралық жағдайларды тексеру және жұмыс нәтижесін рәсімдеу.']:addp('• '+s)
-section('Кітаппен жұмыс істеу','guide',kicker='03 / ҚОЛДАНУ ТӘСІЛІ')
-for title,txt in [('01. Теория','Әр дәріс жаңа беттен басталады. Тақырып атауы видеосабаққа сілтеме ретінде қызмет етеді; мазмұн жолы дәрістің өзіне апарады.'),('02. Практика','Тапсырма бойынша алгоритм, бастапқы код және нәтиже ұсыныңыз. Тек дайын жауапты емес, оның алыну жолын түсіндіріңіз.'),('03. Білімді бақылау','Әр тақырыпта 3 оңай, 4 орташа және 3 қиын теориялық сұрақ, одан кейін 5 практикалық өзіндік тапсырма бар. Тест форматы қолданылмайды.'),('04. Навигация','Екі портреттік бет бір мезетте көрінеді. Бағыттау батырмалары, ← → пернелері немесе көлденең сырғыту арқылы парақтаңыз. Үлкейту кезінде кітапты жылжытып оқуға болады.')]:sub(title);addp(txt)
+section('Алғы сөз','foreword',kicker='01 / АЛҒЫ СӨЗ')
+for text in FOREWORD:
+    addp(text,'small' if text.startswith('Құрастырушы:') else 'body')
 section('Оқу нәтижелері','outcomes',kicker='04 / БІЛІМ МЕН ДАҒДЫ')
 addp('Пәнді меңгерген студент:')
 for i,s in enumerate(OUTCOMES,1):addp(f'{i:02d}. {s}')
@@ -382,38 +387,41 @@ body_text('\n'.join(preamble))
 for number,text in labs.items():
     section(f'Зертханалық жұмыс №{number}',f'lab-{number}',1,kicker=f'ПРАКТИКА / №{number}')
     body_text('\n'.join(text))
-section('Білімді бақылау','assessment',kicker='08 / ӨЗІНДІК ТЕКСЕРУ')
-addp('15 тақырып · 150 теориялық сұрақ · 75 практикалық тапсырма','note')
-addp('Әр тақырыптың теориялық бөлігі үш деңгейге бөлінеді: оңай — ұғымды түсіну; орташа — қолдану мен салыстыру; қиын — талдау және шешімді негіздеу. Практикалық тапсырмалар өзіндік жұмыс ретінде орындалады.')
-sub('Ұсынылатын бағалау өлшемдері')
-addp('Теория: анықтаманың дұрыстығы, ойдың дәлелділігі және тақырыпқа сай мысал. Практика: алгоритмнің дұрыстығы, кодтың орындалуы, шекаралық деректермен тексеру және нәтиженің түсіндірмесі. Жауаптарды тек жатқа айтып емес, мысалмен негіздеңіз.')
-for n,qs in enumerate(QUESTIONS,1):
-    assert len(qs)==15
-    section(f'Дәріс {n}. Білімді бақылау',f'control-{n}',1,kicker=f'{n:02d} / {TITLES[n-1]}')
-    addp(TITLES[n-1],'small')
-    for label,start,end in [('Оңай · білу және түсіну',0,3),('Орташа · қолдану және салыстыру',3,7),('Қиын · талдау және негіздеу',7,10)]:
-        sub(label)
-        for i in range(start,end):
-            story.append(KeepTogether([para(f'{i+1:02d}. {qs[i]}','question'),para(f'Дәріс {n}. Білімді бақылау','caption')]))
-    story.append(PageBreak());sub('Практикалық өзіндік тапсырмалар')
-    addp('Алгоритмді, бастапқы кодты және тексеру нәтижелерін ұсыныңыз.','small')
-    for i,q in enumerate(qs[10:],1):
-        story.append(KeepTogether([para(f'{i:02d}. {q}','question'),para(f'Дәріс {n}. Білімді бақылау','caption')]))
+section('Білімді тексеру материалдары','assessment',kicker='08 / БІЛІМДІ ТЕКСЕРУ')
+addp('100 тест тапсырмасы · 10 тақырыптық блок · жауап кілті','note')
+addp('Әр тапсырмада бір дұрыс жауапты таңдаңыз. Алдымен өз бетіңізше орындаңыз, содан кейін бөлім соңындағы жауап кілтімен салыстырыңыз.')
+for group_index,group in enumerate(TEST_GROUPS,1):
+    section(group['title'],f'test-group-{group_index}',1,kicker='ТЕСТ ТАПСЫРМАЛАРЫ')
+    for q in group['questions']:
+        items=[para(f"{q['number']}. {q['question']}",'question')]
+        items.extend(para(option,'question') for option in q['options'])
+        items.append(Spacer(1,9))
+        story.append(KeepTogether(items))
+section('Тест тапсырмаларының жауап кілті','answer-key',1,kicker='ЖАУАП КІЛТІ')
+rows=[['№','Жауап']*5]
+for i in range(1,21):
+    row=[]
+    for offset in [0,20,40,60,80]:row.extend([str(i+offset),ANSWER_KEY[i+offset]])
+    rows.append(row)
+table=Table([[para(c,'cell') for c in row] for row in rows],colWidths=[CW/10]*10,repeatRows=1)
+table.setStyle(TableStyle([('GRID',(0,0),(-1,-1),.4,LINE),('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e7ece3')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('ALIGN',(0,0),(-1,-1),'CENTER'),('TOPPADDING',(0,0),(-1,-1),4),('BOTTOMPADDING',(0,0),(-1,-1),4)]))
+story.append(table)
 section('Глоссарий','glossary',kicker='09 / ТЕРМИНДЕР')
 for term,definition in GLOSSARY.items():
     story.append(KeepTogether([para(term,'h'),para(definition)]))
 section('Қорытынды','conclusion',kicker='10 / НЕГІЗГІ ТҰЖЫРЫМДАР')
-for s in [
- 'Java бағдарламасын құру есепті талдаудан басталады: кіріс деректер, қажетті нәтиже және алгоритмнің шарттары анық болуы тиіс. Типтерді, операторларды және басқару құрылымдарын дұрыс таңдау есептеу нәтижесінің дұрыстығын қамтамасыз етеді.',
- 'Әдістер, массивтер және коллекциялар есепті бөліктерге бөліп шешуге мүмкіндік береді. Жол, тізім, жиын және сөздік әртүрлі міндет атқарады; деректер құрылымы есептің қасиетіне сай таңдалады.',
- 'Класс пен объект деректерді және сол деректерге қатысты әрекеттерді біріктіреді. Инкапсуляция, мұрагерлік және полиморфизм бағдарламаның түсініктілігін және кеңейтілуін арттырады.',
- 'Математикалық және графикалық құралдарды қолданғанда өлшемдер, координаттар және есептеу дәлдігі ескеріледі. MATLAB пен Java құралдарының міндеттерін ажырату дұрыс орта таңдауға көмектеседі.',
- 'Ерекше жағдайларды өңдеу, енгізуді тексеру және шекаралық сынақтар — сенімді бағдарламаның ажырамас бөлігі. №15 жұмыстың негізгі тұжырымы: қате себебін нақты анықтап, оны пайдаланушыға түсінікті түрде көрсету керек.',
- 'Пәнді меңгерудің нәтижесі — тек код жаза білу емес, шешімін негіздеу, тексеру хаттамасын дайындау және басқа адамның түсінуіне қолайлы бағдарлама ұсыну.'
-]:addp(s)
-section('Пайдаланған әдебиеттер','references',kicker='11 / ДЕРЕККӨЗДЕР')
-sub('Бастапқы оқу құралындағы әдебиеттер')
-body_text('\n'.join(bibliography))
+for text in CONCLUSION:addp(text)
+section('Пайдаланылған әдебиеттер тізімі','references',kicker='11 / ДЕРЕККӨЗДЕР')
+for i,text in enumerate(REFERENCES,1):
+    # Drop only a pasted, truncated filename after an otherwise complete entry.
+    text=re.sub(r'\s+JAVA тілінде.*$','',text)
+    label=escape(f'{i}. {text}')
+    urls=re.findall(r'https?://[^\s]+|www\.[^\s]+',text)
+    if urls:
+        url=urls[0].rstrip('.,;')
+        if url.startswith('www.'):url='https://'+url
+        label=f'<link href="{escape(url)}" color="#183e3c">{label}</link>'
+    story.append(Paragraph(label,styles['body']))
 sub('Қосымша оқу және ресми анықтамалар')
 for label,url in [
  ('Oracle / Dev.java. Learn Java: тіл, объекттер, коллекциялар және модульдер','https://dev.java/learn/'),
@@ -455,8 +463,8 @@ doc=BookDoc(OUT/'java-reader.pdf')
 print('Typesetting the book...',flush=True)
 doc.multiBuild(story,maxPasses=6)
 final=PdfReader(OUT/'java-reader.pdf')
-profile={'version':2,'edition':2026,'title':'Java тілінде объектіге бағытталған бағдарламалау','pdf':'./output/pdf/java-reader.pdf','width':W,'height':H,'pageCount':len(final.pages),'contents':doc.contents,'videos':[{'lecture':n,'id':vid,'url':'https://www.youtube.com/watch?v='+vid,**VIDEOS[vid]} for n,vid in enumerate(VIDEO_MAP,1)],'pages':[{'page':i+1,'kind':'page','width':W,'height':H} for i in range(len(final.pages))]}
+profile={'version':3,'revision':REVISION,'edition':2026,'title':'Java тілінде объектіге бағытталған бағдарламалау','pdf':'./output/pdf/java-reader.pdf','width':W,'height':H,'pageCount':len(final.pages),'contents':doc.contents,'videos':[{'lecture':n,'id':vid,'url':'https://www.youtube.com/watch?v='+vid,**VIDEOS[vid]} for n,vid in enumerate(VIDEO_MAP,1)],'pages':[{'page':i+1,'kind':'page','width':W,'height':H} for i in range(len(final.pages))]}
 (OUT/'book.json').write_text(json.dumps(profile,ensure_ascii=False,indent=2),encoding='utf-8')
-(OUT/'assessment.json').write_text(json.dumps([{'lecture':n,'topic':TITLES[n-1],'theory':[{'level':'оңай' if i<3 else 'орташа' if i<7 else 'қиын','question':q} for i,q in enumerate(qs[:10])],'practice':qs[10:]} for n,qs in enumerate(QUESTIONS,1)],ensure_ascii=False,indent=2),encoding='utf-8')
+(OUT/'assessment.json').write_text(json.dumps({'version':3,'type':'multiple-choice','source':'NewPages/Тест тапсырмалар.docx','groups':TEST_GROUPS,'answerKey':ANSWER_KEY},ensure_ascii=False,indent=2),encoding='utf-8')
 (TMP/'source-audit.json').write_text(json.dumps(SOURCE_STATS,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps({'pages':len(final.pages),'contents':len(doc.contents),'sourceFigures':SOURCE_STATS['images'],'sourceTables':SOURCE_STATS['tables'],'lectures':len(lectures)+1,'labs':list(labs)},ensure_ascii=False),flush=True)

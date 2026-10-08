@@ -1,11 +1,11 @@
 {
-  "pages": 215,
-  "portraitPages": 215,
-  "theoryQuestions": 150,
-  "practicalTasks": 75,
-  "levels": "3/4/3",
-  "linkAnnotations": 188,
+  "pages": 208,
+  "portraitPages": 208,
+  "testQuestions": 100,
+  "testGroups": 10,
+  "answerKeyEntries": 100,
+  "linkAnnotations": 228,
   "videoLinks": 61,
-  "newPageTopics": 44,
+  "newPageTopics": 39,
   "issues": []
 }

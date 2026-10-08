@@ -229,10 +229,12 @@ async function toggleZoom(point) {
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
   try {
-    const response = await fetch(new URL('./output/pdf/book.json', import.meta.url));
+    const response = await fetch(new URL('./output/pdf/book.json?v=20261008-newpages', import.meta.url));
     if (!response.ok) throw Error('Кітап мазмұны табылмады.');
     profile = await response.json();
-    const file = await fetch(new URL(profile.pdf, import.meta.url));
+    const pdfURL = new URL(profile.pdf, import.meta.url);
+    if (profile.revision) pdfURL.searchParams.set('v',profile.revision);
+    const file = await fetch(pdfURL);
     if (!file.ok) throw Error('Кітаптың PDF файлы табылмады.');
     pdf = await pdfjs.getDocument({data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false}).promise;
     pages = Array.from({length: pdf.numPages}, (_, i) => ({source: i + 1, half: null, width: profile.width, height: profile.height}));
