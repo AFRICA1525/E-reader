@@ -27,7 +27,7 @@ OUT = ROOT/'output/pdf'; TMP = ROOT/'tmp/pdfs'
 OUT.mkdir(parents=True,exist_ok=True); (TMP/'figures').mkdir(parents=True,exist_ok=True)
 SOURCE = next(ROOT.glob('*.pdf'))
 NEW = ROOT/'NewPages'
-REVISION = '20261008-spreads12'
+REVISION = '20261008-cover-final'
 
 def document_paragraphs(name):
     return [p.text.strip() for p in Document(NEW/name).paragraphs if p.text.strip()]
@@ -181,7 +181,7 @@ SOURCE_STATS={'pages':106,'images':0,'tables':0,'lectureChars':Counter(),'labCha
 EDITORIAL_NOTES={
  7:'Дәрістің бастапқы «Тізімдер» атауы сақталған. Негізгі мәтін String және StringBuffer арқылы сөз тіркестерімен жұмыс істеуге арналған; білімді бақылау осы мазмұн бойынша құрастырылған.',
  9:'Мәтінде JavaScript функциялары салыстырмалы мысал ретінде кездеседі. Java мен JavaScript — бөлек тілдер. Java әдістерінің дұрыс баламалары мен факториалдың тоқтау шарты қосымшада берілген. «Жиым» — массив; ол Set жиынымен бір ұғым емес.',
- 10:'Бұл дәрістің негізгі мазмұны — сөз тіркестерін өңдеу. <string>, assign(), c_str(), string және cout жазылымдары C++ мысалдарына жатады. Java-да String, substring(), indexOf(), equals() және StringBuffer пайдаланылады. Қосымшада Java баламалары берілген.',
+ 10:'Бұл дәрістің негізгі мазмұны — сөз тіркестерін өңдеу. <string>, assign(), c_str(), string және cout жазылымдары C++ мысалдарына жатады. Java-да String, substring(), indexOf(), equals() және StringBuffer пайдаланылады.',
  12:'Бастапқы дәріс класс, объект және конструктор ұғымдарын қамтиды. Пакеттер мен компиляция модулі туралы материал №13 зертханалық жұмыста берілген.',
  13:'MATLAB — матрицалық және ғылыми есептеулерге арналған бөлек орта; Simulink — модельдеу пакеті. Java Math класы MATLAB ортасымен бірдей емес. Практикалық салыстыру тапсырмалары осы айырманы ескереді.'
 }
@@ -383,7 +383,7 @@ for kind,s in LECTURE15:
     else:addp(s)
 section('Практикалық бөлім','practice',kicker='07 / ЗЕРТХАНАЛЫҚ ЖҰМЫСТАР')
 addp('Әр жұмыс үшін теориялық дайындық, алгоритм, бағдарлама және орындалу нәтижесі ұсынылады. Бастапқы жұмыс нөмірлері сақталған; №5–6 біріккен жұмыс ретінде беріледі.')
-addp('Бастапқы практикалық бөлімде C/C++ және JavaScript тілдерінің салыстырмалы мысалдары бар. Java тіліндегі өзіндік тапсырмалар «Білімді бақылау» бөлімінде, орындалатын үлгілер қосымшада берілген.','small')
+addp('Бастапқы практикалық бөлімде C/C++ және JavaScript тілдерінің салыстырмалы мысалдары бар. Білімді тексеруге арналған тест тапсырмалары келесі бөлімде берілген.','small')
 body_text('\n'.join(preamble))
 for number,text in labs.items():
     section(f'Зертханалық жұмыс №{number}',f'lab-{number}',1,kicker=f'ПРАКТИКА / №{number}')
@@ -438,28 +438,6 @@ for vid in dict.fromkeys(VIDEO_MAP+['l5Sm2Ps6AOg']):
     url='https://www.youtube.com/watch?v='+vid
     story.append(KeepTogether([Paragraph(f'<link href="{url}" color="#183e3c"><b>{escape(v["title"])}</b></link>',styles['body']),para(v['author']+' · Дәрістер: '+(', '.join(used) or '8, қосымша'),'small'),para(url,'small')]))
 addp('Электрондық дереккөздер мен видеолекцияларға жүгіну күні: 05.10.2026. Жаңа сұрақтар мен тапсырмалар бастапқы оқу құралының нақты тақырыптары және осы бөлімдегі ресми анықтамалар негізінде құрастырылды.','small')
-section('Қосымшалар','appendices',kicker='12 / КОДТАР МЕН АЛГОРИТМДЕР')
-addp('Бұл бөлімдегі Java үлгілері негізгі ұғымдарды қайталау және бастапқы мәтіндегі салыстырмалы тіл мысалдарын Java-ға бейімдеу үшін берілген.')
-section('A. Консольдік енгізу және есептеу','appendix-a',1,kicker='ҚОСЫМША A / JAVA')
-code('import java.util.Scanner;\n\npublic class Average {\n    public static void main(String[] args) {\n        try (Scanner sc = new Scanner(System.in)) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            int c = sc.nextInt();\n            double result = ((double) a + b + c) / 3;\n            System.out.printf("%.2f%n", result);\n        }\n    }\n}')
-addp('Алгоритм: үш санды оқу → қосындыны нақты типке ауыстыру → 3-ке бөлу → нәтижені шығару. 1, 2, 2 енгізуінде 1.67 шығады.')
-section('B. Рекурсия және матрица','appendix-b',1,kicker='ҚОСЫМША B / JAVA')
-code('public class Algorithms {\n    static long factorial(int n) {\n        if (n < 0 || n > 20) {\n            throw new IllegalArgumentException("n: 0–20");\n        }\n        return n <= 1 ? 1 : n * factorial(n - 1);\n    }\n\n    static int diagonalSum(int[][] matrix) {\n        int sum = 0;\n        for (int i = 0; i < matrix.length; i++) {\n            if (matrix[i].length != matrix.length) {\n                throw new IllegalArgumentException(\n                    "Квадрат матрица қажет");\n            }\n            sum += matrix[i][i];\n        }\n        return sum;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(factorial(5));\n        int[][] m = {{1,2,3},{4,5,6},{7,8,9}};\n        System.out.println(diagonalSum(m));\n    }\n}')
-addp('Күтілетін нәтиже: 120 және 15. Факториалға n≤1 базалық жағдайы берілген; long типінің шегіне сай n≤20 шарты қойылған.')
-section('C. Жолдар және коллекциялар','appendix-c',1,kicker='ҚОСЫМША C / JAVA')
-code('import java.util.*;\n\npublic class TextTools {\n    public static void main(String[] args) {\n        String text = "Айна Java тілін үйренеді";\n        System.out.println(text.replace("Айна", "Асыл"));\n        System.out.println(text.substring(0, 4));\n        System.out.println(text.indexOf("Java"));\n        StringBuffer buffer = new StringBuffer("Java");\n        buffer.append(" 2026");\n        System.out.println(buffer);\n\n        List<Integer> list = new ArrayList<>(\n            Arrays.asList(3, 1, 3, 2, 1));\n        Set<Integer> unique = new LinkedHashSet<>(list);\n        System.out.println(unique);\n\n        Map<String, Integer> counts = new LinkedHashMap<>();\n        for (String word : "java code java".split(" ")) {\n            counts.merge(word, 1, Integer::sum);\n        }\n        System.out.println(counts);\n    }\n}')
-addp('Нәтиже: Асыл Java тілін үйренеді; Айна; 5; Java 2026; [3, 1, 2]; {java=2, code=1}. C++ assign() идеясына Java-да айнымалыға меншіктеу, find() идеясына indexOf(), салыстыруға equals() сәйкес келеді.')
-section('D. Объект және конструктор','appendix-d',1,kicker='ҚОСЫМША D / JAVA')
-code('public class Student {\n    private final String name;\n    private int grade;\n\n    public Student(String name, int grade) {\n        this.name = name;\n        setGrade(grade);\n    }\n\n    public void setGrade(int grade) {\n        if (grade < 0 || grade > 100) {\n            throw new IllegalArgumentException("Баға: 0–100");\n        }\n        this.grade = grade;\n    }\n\n    public String describe() {\n        return name + ": " + grade;\n    }\n\n    public static void main(String[] args) {\n        Student student = new Student("Азат", 85);\n        System.out.println(student.describe());\n    }\n}')
-addp('Күтілетін нәтиже: Азат: 85. private өрістер инкапсуляцияны, конструктор объектіні бастапқы күйге келтіруді көрсетеді.')
-section('E. №15 жұмысқа тексеру хаттамасы','appendix-e',1,kicker='ҚОСЫМША E / БАҚЫЛАУ')
-rows=[['Енгізу','Күтілетін нәтиже'],['1','m[1] = 4'],['2','m[2] = 2'],['0','ArithmeticException өңделеді'],['3','ArrayIndexOutOfBoundsException өңделеді'],['abc','InputMismatchException өңделеді']]
-table=Table([[para(c,'cell') for c in r] for r in rows],colWidths=[70,CW-70],repeatRows=1)
-table.setStyle(TableStyle([('GRID',(0,0),(-1,-1),.5,LINE),('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e7ece3')),('VALIGN',(0,0),(-1,-1),'TOP'),('TOPPADDING',(0,0),(-1,-1),8),('BOTTOMPADDING',(0,0),(-1,-1),8)]));story.append(table)
-addp('Әр іске қосуда finally блогының «Өңдеу аяқталды» хабарламасын да тексеріңіз. Хаттаманы нақты нәтижемен, сәйкестік белгісімен және түзету түсіндірмесімен толықтырыңыз.')
-sub('Практикалық жұмысты рәсімдеу үлгісі')
-for s in ['1. Тақырып және мақсат.','2. Кіріс деректер, шектеулер және күтілетін нәтиже.','3. Алгоритм немесе блок-схема.','4. Бастапқы Java коды.','5. Қалыпты және шекаралық тексерулер кестесі.','6. Қорытынды және кездескен қателердің түсіндірмесі.']:addp(s)
-
 doc=BookDoc(OUT/'java-reader.pdf')
 print('Typesetting the book...',flush=True)
 doc.multiBuild(story,maxPasses=6)
