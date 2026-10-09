@@ -44,7 +44,8 @@ const source=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8')
 vm.runInContext(source,context);
 vm.runInContext('pdf={}; profile={width:480,height:680}; pages=Array.from({length:215},(_,i)=>({source:i+1,width:480,height:680})); render=async()=>true;',context);
 assert.equal(vm.runInContext('layout(0).entries.length',context),1,'cover must stand alone on a phone');
-assert.equal(vm.runInContext('layout(1).entries.length',context),2,'pages after the cover form a spread');
+assert.equal(vm.runInContext('layout(1).entries.length',context),1,'phone reads one page');
+vm.runInContext('phoneQuery.matches=false',context);
 assert.equal(vm.runInContext('adjacentPage(1,0)',context),1);
 assert.equal(vm.runInContext('adjacentPage(-1,1)',context),0);
 assert.equal(vm.runInContext('adjacentPage(1,1)',context),3);
@@ -86,11 +87,11 @@ assert.equal(canvas.style.visibility,'hidden','stationary old page must not show
 await vm.runInContext('cancelGesture()',context);
 assert.equal(canvas.style.visibility,'','cancel restores the current page');
 assert.equal(vm.runInContext('index',context),0);
-vm.runInContext('pointers.clear(); phoneQuery.matches=false; index=4;',context);
+vm.runInContext('pointers.clear(); phoneQuery.matches=false; index=3;',context);
 dispatch('pointerdown',pointer(7,100,200));
 dispatch('pointermove',pointer(7,150,200));
 await new Promise(setImmediate);
-assert.deepEqual(vm.runInContext('Array.from(curl.preview.children,p=>p.dataset.previewPage).join(",")',context),'3,4','previous desktop spread appears during a reverse drag');
+assert.deepEqual(vm.runInContext('Array.from(curl.preview.children,p=>p.dataset.previewPage).join(",")',context),'2,3','previous desktop spread appears during a reverse drag');
 await vm.runInContext('cancelGesture()',context);
 assert.equal(canvas.style.visibility,'');
 console.log('PASS: pinch, pan, zoom limit, next-page preview, reverse spread, cancellation.');

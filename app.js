@@ -12,11 +12,11 @@ const pointers = new Map();
 const cache = new Map(), pending = new Map();
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const phoneQuery = matchMedia('(max-width: 760px), (max-width: 1000px) and (max-height: 600px)');
-const pageStep = (i = index) => i === 0 ? 1 : 2;
-const adjacentPage = (direction, i = index) => direction > 0 ? i + pageStep(i) : i <= 1 ? 0 : i - 2;
+const pageStep = (i = index) => i === 0 || phoneQuery.matches ? 1 : 2;
+const adjacentPage = (direction, i = index) => direction > 0 ? i + pageStep(i) : Math.max(0, i - (phoneQuery.matches ? 1 : 2));
 const normalizePage = target => {
   const clamped = Math.max(0, Math.min(pages.length - 1, target));
-  return clamped === 0 ? 0 : 1 + Math.floor((clamped - 1) / 2) * 2;
+  return clamped === 0 || phoneQuery.matches ? clamped : 1 + Math.floor((clamped - 1) / 2) * 2;
 };
 const positionKey = 'java-textbook:2026:position';
 function toast(message) {
@@ -27,8 +27,8 @@ function sound() { if (!reducedMotion()) playPageSound(); }
 function savePosition() { try { localStorage.setItem(positionKey, String(index)); } catch {} }
 function layout(i = index) {
   const count = pageStep(i), entries = pages.slice(i, i + count), stage = $('stage');
-  const width = Math.max(80, stage.clientWidth - (count === 1 ? 24 : 60));
-  const height = Math.max(80, stage.clientHeight - 40);
+  const width = Math.max(80, stage.clientWidth - 12);
+  const height = Math.max(80, stage.clientHeight - 12);
   const scale = Math.min(width / (profile.width * count), height / profile.height) * zoom;
   return {entries, scale, ratio: Math.min(devicePixelRatio || 1, 2)};
 }
@@ -58,7 +58,7 @@ function updateNavigation(entries) {
   $('prev').disabled = index === 0; $('next').disabled = index + pageStep() >= pages.length;
   $('prev').setAttribute('aria-label', pageStep() === 1 ? 'Алдыңғы бет' : 'Алдыңғы екі бет');
   $('next').setAttribute('aria-label', pageStep() === 1 ? 'Келесі бет' : 'Келесі екі бет');
-  document.querySelector('.reading-hint').textContent = pageStep() === 1 ? 'Мұқаба · бір бет' : 'Екі бет · бір кітап';
+  document.querySelector('.reading-hint').textContent = pageStep() === 1 ? (index === 0 ? 'Мұқаба · бір бет' : 'Бір бет · ыңғайлы оқу') : 'Екі бет · бір кітап';
   $('progressFill').style.width = `${(index + entries.length) / pages.length * 100}%`;
   const current = [...profile.contents].reverse().find(item => item.page <= index + entries.length);
   $('chapterLabel').textContent = current?.title || profile.title;
@@ -171,7 +171,14 @@ function setContents(open) {
 }
 function buildContents() {
   const content = $('sideContent'); content.replaceChildren();
+  let groupBody = null;
   for (const item of profile.contents) {
+    if (item.depth === 0) groupBody = null;
+    if (['theory','practice','assessment'].includes(item.key)) {
+      const group = document.createElement('details'); group.className = 'contents-group'; group.open = true;
+      const summary = document.createElement('summary'); summary.textContent = item.title;
+      groupBody = document.createElement('div'); group.append(summary, groupBody); content.append(group);
+    }
     const button = document.createElement('button');
     button.className = `contents-entry depth-${item.depth}`; button.dataset.key = item.key;
     const label = document.createElement('span'), page = document.createElement('span');
@@ -181,10 +188,19 @@ function buildContents() {
       if (innerWidth <= 900 || phoneQuery.matches) setContents(false);
       await go(item.page - 1); await render();
     };
-    content.append(button);
+    (groupBody || content).append(button);
   }
 }
+let zoomFadeTimer;
+function wakeZoomControls() {
+  clearTimeout(zoomFadeTimer);
+  $('zoomControls').classList.remove('idle');
+  if (zoom > 1) zoomFadeTimer = setTimeout(() => {
+    $('zoomControls').classList.add('idle');
+  }, 3000);
+}
 function updateZoom() {
+  wakeZoomControls();
   document.body.classList.toggle('zoomed', zoom > 1);
   $('zoomToggle').setAttribute('aria-pressed', String(zoom > 1));
   $('zoomToggle').querySelector('span').textContent = zoom > 1 ? 'Қалыпты көрініс' : 'Үлкейту';
@@ -233,7 +249,7 @@ async function toggleZoom(point) {
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
   try {
-    const response = await fetch(new URL('./output/pdf/book.json?v=20261008-cover-final', import.meta.url), {cache:'no-store'});
+    const response = await fetch(new URL('./output/pdf/book.json?v=20261009-reader', import.meta.url), {cache:'no-store'});
     if (!response.ok) throw Error('Кітап мазмұны табылмады.');
     profile = await response.json();
     const pdfURL = new URL(profile.pdf, import.meta.url);
@@ -253,12 +269,16 @@ $('prev').onclick = () => go(adjacentPage(-1), -1); $('next').onclick = () => go
 $('pageInput').onchange = async e => { const target = Number(e.target.value); if (target >= 1) await go(target - 1); e.target.value = index + 1; };
 $('pageInput').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); $('pageInput').onchange(e); } };
 $('sideToggle').onclick = () => setContents($('sidebar').hidden); $('closeSide').onclick = () => setContents(false);
-$('zoomToggle').onclick = () => toggleZoom(); $('retry').onclick = loadBook;
+$('zoomToggle').onclick = () => { if (zoom > 1 && $('zoomControls').classList.contains('idle')) wakeZoomControls(); else toggleZoom(); }; $('retry').onclick = loadBook;
 $('zoomOut').onclick = () => changeZoom(zoom-.25);
 $('zoomIn').onclick = () => changeZoom(zoom+.25);
 $('zoomValue').onclick = () => changeZoom(1);
 $('zoomRange').oninput = e => { if (!busy && !pinch) previewZoom(Number(e.target.value)/100,zoomAnchor()); };
 $('zoomRange').onchange = () => changeZoom(zoom);
+for (const event of ['pointermove','focusin','focusout','keydown']) $('zoomControls').addEventListener(event,wakeZoomControls);
+$('zoomControls').addEventListener('click',e => {
+  if ($('zoomControls').classList.contains('idle')) { e.preventDefault(); e.stopPropagation(); wakeZoomControls(); }
+},true);
 document.querySelector('.brand').onclick = e => { e.preventDefault(); go(0); };
 $('fullscreen').onclick = async () => {
   try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); }
