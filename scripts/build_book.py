@@ -447,3 +447,7 @@ profile={'version':3,'revision':REVISION,'edition':2026,'title':'Java тілін
 (OUT/'assessment.json').write_text(json.dumps({'version':3,'type':'multiple-choice','source':'NewPages/Тест тапсырмалар.docx','groups':TEST_GROUPS,'answerKey':ANSWER_KEY},ensure_ascii=False,indent=2),encoding='utf-8')
 (TMP/'source-audit.json').write_text(json.dumps(SOURCE_STATS,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps({'pages':len(final.pages),'contents':len(doc.contents),'sourceFigures':SOURCE_STATS['images'],'sourceTables':SOURCE_STATS['tables'],'lectures':len(lectures)+1,'labs':list(labs)},ensure_ascii=False),flush=True)
+
+with pdfplumber.open(OUT/'java-reader.pdf') as search_pdf:
+    search_pages=[{'page':i+1,'text':' '.join((page.crop((0,36,W,645)).extract_text() or '').split())} for i,page in enumerate(search_pdf.pages)]
+(OUT/'search.json').write_text(json.dumps(search_pages,ensure_ascii=False,separators=(',',':')),encoding='utf-8')

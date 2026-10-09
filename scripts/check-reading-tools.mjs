@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {normalizeSearch,searchPages,initReadingTools} from '../reading-tools.js';
+const pages=JSON.parse(fs.readFileSync(new URL('../output/pdf/search.json',import.meta.url),'utf8'));
+const profile=JSON.parse(fs.readFileSync(new URL('../output/pdf/book.json',import.meta.url),'utf8'));
+assert.equal(pages.length,profile.pageCount);
+assert.equal(normalizeSearch('  ҚАЗАҚША \n мәтін  '),'қазақша мәтін');
+assert.ok(searchPages(pages,'инкапсуляция').length>0);
+assert.ok(searchPages(pages,'JAVA класс').length>0);
+assert.equal(searchPages(pages,'').length,0);
+assert.equal(searchPages(pages,'nonexistentword912387').length,0);
+const elements=new Map(), storage=new Map();let current=0,destination;
+function element(id){if(!elements.has(id))elements.set(id,{hidden:false,textContent:'',children:[],value:'',setAttribute(){},append(...items){this.children.push(...items);},replaceChildren(){this.children=[];},focus(){}});return elements.get(id);}
+globalThis.document={getElementById:element,createElement:()=>element(`new-${elements.size}`)};
+globalThis.localStorage={getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)};
+const tools=initReadingTools({current:()=>current,go:async page=>{destination=page;},openContents(){}});
+tools.resume(20,229);
+assert.equal(element('continueReading').hidden,false);
+await element('continueReading').onclick();assert.equal(destination,20);
+current=20;tools.update();assert.equal(element('continueReading').hidden,true);
+element('bookmarkPage').onclick();assert.equal(JSON.parse(storage.values().next().value)[0],21);
+const reloaded=initReadingTools({current:()=>current,go:async page=>{destination=page;},openContents(){}});
+reloaded.resume(20,229);assert.equal(element('bookmarkList').children.length,1);
+element('bookmarkList').children[0].children[1].onclick();
+assert.equal(element('bookmarkList').children.length,0);
+assert.equal(element('bookmarkEmpty').hidden,false);
+console.log('PASS: Kazakh search, empty results, resume, persisted bookmarks and removal.');

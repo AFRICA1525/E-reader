@@ -1,3 +1,4 @@
+import {initReadingTools} from './reading-tools.js?v=20261009-tools';
 import * as pdfjs from './vendor/pdf.mjs';
 import {makeCurl,paintCurl,finishCurl,prepareCurl} from './curl.js';
 import {attachPageLinks} from './pdf-links.js';
@@ -5,6 +6,7 @@ import {preparePageSound,playPageSound} from './page-sound.js';
 
 pdfjs.GlobalWorkerOptions.workerSrc = './vendor/pdf.worker.mjs';
 const $ = id => document.getElementById(id);
+let readingTools;
 let pdf, profile, pages = [], index = 0, zoom = 1, busy = false, renderVersion = 0;
 let gesture = null, curl = null, suppressClickUntil = 0, resizeTimer, warmTimer;
 let pinch = null, pan = null;
@@ -24,7 +26,7 @@ function toast(message) {
   clearTimeout(toast.timer); toast.timer = setTimeout(() => $('toast').classList.remove('show'), 3000);
 }
 function sound() { if (!reducedMotion()) playPageSound(); }
-function savePosition() { try { localStorage.setItem(positionKey, String(index)); } catch {} }
+function savePosition() { if (index === 0) return; try { localStorage.setItem(positionKey, String(index)); } catch {} }
 function layout(i = index) {
   const count = pageStep(i), entries = pages.slice(i, i + count), stage = $('stage');
   const width = Math.max(80, stage.clientWidth - 12);
@@ -68,6 +70,7 @@ function updateNavigation(entries) {
     if (active) button.setAttribute('aria-current', 'location'); else button.removeAttribute('aria-current');
   });
   savePosition();
+  readingTools?.update();
 }
 function restoreTurnPreview(sheet) {
   if (!sheet) return;
@@ -249,7 +252,7 @@ async function toggleZoom(point) {
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
   try {
-    const response = await fetch(new URL('./output/pdf/book.json?v=20261009-reader', import.meta.url), {cache:'no-store'});
+    const response = await fetch(new URL('./output/pdf/book.json?v=20261009-tools', import.meta.url), {cache:'no-store'});
     if (!response.ok) throw Error('Кітап мазмұны табылмады.');
     profile = await response.json();
     const pdfURL = new URL(profile.pdf, import.meta.url);
@@ -258,8 +261,11 @@ async function loadBook() {
     if (!file.ok) throw Error('Кітаптың PDF файлы табылмады.');
     pdf = await pdfjs.getDocument({data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false}).promise;
     pages = Array.from({length: pdf.numPages}, (_, i) => ({source: i + 1, half: null, width: profile.width, height: profile.height}));
+    let saved=0;try {saved=Number(localStorage.getItem(positionKey))||0;} catch {}
     index = 0; // Every opening starts at the standalone cover.
+    readingTools=initReadingTools({go,current:()=>index,openContents:setContents});
     buildContents(); await render();
+    readingTools.resume(saved,pages.length);
   } catch (error) {
     console.error(error); $('errorText').textContent = `${error.message} Сайтты HTTP-сервер арқылы ашыңыз және output/pdf папкасын тексеріңіз.`;
     $('error').hidden = false;
@@ -287,7 +293,7 @@ $('fullscreen').onclick = async () => {
 document.addEventListener('keydown', e => {
   if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
   if (e.key === 'Tab' && phoneQuery.matches && !$('sidebar').hidden) {
-    const buttons = [...$('sidebar').querySelectorAll('button')];
+    const buttons = [...$('sidebar').querySelectorAll('button,input,summary')].filter(element => element.getClientRects().length);
     const first = buttons[0], last = buttons.at(-1);
     if (e.shiftKey && e.target === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && e.target === last) { e.preventDefault(); first.focus(); }

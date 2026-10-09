@@ -2,18 +2,21 @@
 <html lang="kk"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#183e3c">
 <meta name="description" content="Java тілінде объектіге бағытталған бағдарламалау. 15 дәріс, зертханалық жұмыстар және білімді бақылау. Электронды оқу құралы, 2026.">
-<title>JAVA · Электронды оқу құралы</title><link rel="stylesheet" href="style.css?v=20261009-reader"><link rel="stylesheet" href="reader.css?v=20261009-reader"></head>
+<title>JAVA · Электронды оқу құралы</title><link rel="stylesheet" href="style.css?v=20261009-tools"><link rel="stylesheet" href="reader.css?v=20261009-tools"></head>
 <body>
 <header>
 <a class="brand" href="./" aria-label="Кітаптың басына"><span class="brand-mark">J<span>•</span></span><span class="brand-copy"><b>JAVA</b><small>ЭЛЕКТРОНДЫ ОҚУ ҚҰРАЛЫ</small></span></a>
 <div class="edition">ҚАЗАҚША <span>·</span> 2026</div>
-<div class="header-tools"><button id="sideToggle" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Мазмұны</span></button><button id="fullscreen" title="Толық экран" aria-label="Толық экран"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div>
+<div class="header-tools"><button id="sideToggle" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Мазмұны</span></button><button id="toolsToggle" title="Іздеу және бетбелгілер" aria-label="Іздеу және бетбелгілер"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg></button><button id="fullscreen" title="Толық экран" aria-label="Толық экран"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div>
 </header>
-<div class="workspace"><aside id="sidebar" hidden aria-label="Кітап мазмұны"><div class="side-head"><div><small>КІТАП БОЙЫНША БАҒДАР</small><h2>Мазмұны</h2></div><button id="closeSide" aria-label="Мазмұнын жабу">×</button></div><nav id="sideContent"></nav></aside>
+<div class="workspace"><aside id="sidebar" hidden aria-label="Кітап мазмұны"><div class="side-head"><div><small>КІТАП БОЙЫНША БАҒДАР</small><h2>Мазмұны</h2></div><button id="closeSide" aria-label="Мазмұнын жабу">×</button></div><div class="reading-tools">
+<form id="searchForm"><label for="bookSearch">Кітаптан іздеу</label><div class="search-line"><input id="bookSearch" type="search" placeholder="Термин немесе сөз…" autocomplete="off"><button type="submit" aria-label="Іздеу">Іздеу</button></div></form>
+<p id="toolStatus" role="status"></p><div id="searchResults"></div>
+<details><summary>Бетбелгілер</summary><button id="bookmarkPage" aria-pressed="false">☆ Осы бетті сақтау</button><p id="bookmarkEmpty">Сақталған беттер жоқ.</p><div id="bookmarkList"></div></details></div><nav id="sideContent"></nav></aside>
 <main><div class="topline"><span id="chapterLabel">Java тілінде объектіге бағытталған бағдарламалау</span><span class="reading-hint">Екі бет · бір кітап</span></div>
 <section id="reader" aria-label="Электронды кітап"><button id="prev" class="arrow" aria-label="Алдыңғы екі бет">‹</button><div id="stage"><div id="book" class="double" aria-live="off"></div></div><button id="next" class="arrow" aria-label="Келесі екі бет">›</button></section>
 <footer><div class="footer-note">Найзағараева А. А.</div><div class="navigation"><label for="pageInput" class="sr-only">Бет нөмірі</label><input id="pageInput" type="number" inputmode="numeric" enterkeyhint="go" min="1" value="1"><span id="pageTotal"></span></div><button id="zoomToggle" aria-pressed="false" title="Оқу үшін үлкейту"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5M7 10h6m-3-3v6"/></svg><span>Үлкейту</span></button></footer><div class="reading-progress" aria-hidden="true"><span id="progressFill"></span></div></main></div>
 <div id="loading" role="status"><div class="loading-mark">J<span>•</span></div><span id="loadingText">Кітап ашылуда…</span><div class="loading-line"></div></div>
 <div id="zoomControls" hidden role="group" aria-label="Масштабты өзгерту"><div class="zoom-buttons"><button id="zoomOut" aria-label="Кішірейту">−</button><button id="zoomValue" title="Бетке сыйдыру" aria-label="Бетке сыйдыру">100%</button><button id="zoomIn" aria-label="Үлкейту қадамы">＋</button></div><label for="zoomRange" class="sr-only">Масштаб</label><input id="zoomRange" type="range" min="100" max="400" step="5" value="100" aria-label="Масштаб"></div>
-<div id="error" hidden role="alert"><h1>Кітапты ашу мүмкін болмады</h1><p id="errorText"></p><button id="retry">Қайта ашу</button></div><div id="toast" role="status"></div>
-<script type="module" src="app.js?v=20261009-reader"></script></body></html>
+<div id="error" hidden role="alert"><h1>Кітапты ашу мүмкін болмады</h1><p id="errorText"></p><button id="retry">Қайта ашу</button></div><div id="toast" role="status"></div><button id="continueReading" hidden></button>
+<script type="module" src="app.js?v=20261009-tools"></script></body></html>
