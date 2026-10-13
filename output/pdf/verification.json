@@ -1,11 +1,11 @@
 {
-  "pages": 229,
-  "portraitPages": 229,
+  "pages": 246,
+  "portraitPages": 246,
   "testQuestions": 100,
   "testGroups": 10,
   "answerKeyEntries": 100,
-  "linkAnnotations": 221,
+  "linkAnnotations": 188,
   "videoLinks": 61,
-  "newPageTopics": 39,
+  "newPageTopics": 43,
   "issues": []
 }

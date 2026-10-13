@@ -70,3 +70,5 @@ footer{height:40px;min-height:40px;padding:0 24px}
 @media(max-width:760px),(max-width:1000px) and (max-height:600px){#continueReading{bottom:calc(78px + env(safe-area-inset-bottom))}.header-tools{gap:0}.header-tools button{padding:8px}#sideToggle{padding:8px}.brand-copy small{letter-spacing:.3px}.reading-tools{padding:14px 20px}}
 
 .reading-tools,.side-head{flex-shrink:0}
+
+.self-check-link{display:block;margin:8px 0 16px;padding:14px 10px;background:var(--ink);color:var(--panel);border-radius:8px;text-decoration:none;line-height:1.5}

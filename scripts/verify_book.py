@@ -39,7 +39,7 @@ for i,p in enumerate(doc.pages):
             links+=1
             if 'youtube' in str(a.get('/A',{}).get('/URI','')):video_links+=1
 for item in profile['contents']:
-    if item['depth']==1 and (item['key'].startswith('lecture-') or item['key'].startswith('lab-') or item['key'].startswith('test-group-')):
+    if item['depth']==1 and (item['key'].startswith('lecture-') or item['key'].startswith('lab-') or item['key'].startswith('test-group-') or item['key'].startswith('independent-')):
         p=doc.pages[item['page']-1]
         chars=[c for c in p.chars if c['top']>35 and c['bottom']<645]
         if not chars:issues.append({'page':item['page'],'kind':'empty-heading'})
@@ -47,6 +47,7 @@ for item in profile['contents']:
         if chars and min(c['top'] for c in chars)>85:issues.append({'page':item['page'],'kind':'heading-not-at-top'})
         boundaries.append(item['page'])
 assert video_links>=30,video_links
+assert all(phrase not in ''.join(p.extract_text() or '' for p in doc.pages) for phrase in ['Осыдан кейін дәрістер кетеді','Осыдан кейін зертханалық жұмыстар кетеді','Веб-оқулыққа қосу үшін:'])
 assert not issues,issues
 pdfium=pypdfium2.PdfDocument(str(out/'java-reader.pdf'))
 # Every page receives a rendered thumbnail for complete visual review.

@@ -1,306 +1,360 @@
 {
   "version": 3,
-  "revision": "20261008-cover-final",
+  "revision": "20261013-assets2",
   "edition": 2026,
   "title": "Java тілінде объектіге бағытталған бағдарламалау",
   "pdf": "./output/pdf/java-reader.pdf",
   "width": 480,
   "height": 680,
-  "pageCount": 229,
+  "pageCount": 246,
   "contents": [
     {
-      "title": "Алғы сөз",
-      "key": "foreword",
+      "title": "Электрондық оқу құралы",
+      "key": "about",
       "depth": 0,
       "page": 2
-    },
-    {
-      "title": "Оқу нәтижелері",
-      "key": "outcomes",
-      "depth": 0,
-      "page": 4
     },
     {
       "title": "Мазмұны",
       "key": "contents",
       "depth": 0,
-      "page": 5
+      "page": 3
+    },
+    {
+      "title": "Кіріспе",
+      "key": "foreword",
+      "depth": 0,
+      "page": 7
+    },
+    {
+      "title": "Оқу құралының мақсаты мен міндеттері",
+      "key": "purpose",
+      "depth": 1,
+      "page": 9
+    },
+    {
+      "title": "Күтілетін оқу нәтижелері",
+      "key": "outcomes",
+      "depth": 1,
+      "page": 10
+    },
+    {
+      "title": "Электрондық оқу құралын пайдалану нұсқаулығы",
+      "key": "guide",
+      "depth": 1,
+      "page": 11
+    },
+    {
+      "title": "Бағдарламалау ортасын орнату және баптау",
+      "key": "setup",
+      "depth": 0,
+      "page": 12
     },
     {
       "title": "Теориялық бөлім",
       "key": "theory",
       "depth": 0,
-      "page": 8
+      "page": 13
     },
     {
       "title": "Дәріс 1. Кіріспе",
       "key": "lecture-1",
       "depth": 1,
-      "page": 9
+      "page": 16
     },
     {
       "title": "Дәріс 2. Тілдің негіздері, мәліметтер түрлері және өңдеу ортасы",
       "key": "lecture-2",
       "depth": 1,
-      "page": 14
+      "page": 21
     },
     {
       "title": "Дәріс 3. Мәліметтерді енгізу және шығару",
       "key": "lecture-3",
       "depth": 1,
-      "page": 22
+      "page": 29
     },
     {
       "title": "Дәріс 4. Базалық математикалық операциялар және есептеулер",
       "key": "lecture-4",
       "depth": 1,
-      "page": 26
+      "page": 33
     },
     {
       "title": "Дәріс 5. Шартты оператор: if",
       "key": "lecture-5",
       "depth": 1,
-      "page": 37
+      "page": 44
     },
     {
       "title": "Дәріс 6. Циклдік операторлар: for және while",
       "key": "lecture-6",
       "depth": 1,
-      "page": 41
+      "page": 48
     },
     {
       "title": "Дәріс 7. Тізімдер",
       "key": "lecture-7",
       "depth": 1,
-      "page": 48
+      "page": 55
     },
     {
       "title": "Дәріс 8. Рекурсия және екі өлшемді массивтер",
       "key": "lecture-8",
       "depth": 1,
-      "page": 53
+      "page": 60
     },
     {
       "title": "Дәріс 9. Функцияны хабарлау. Жиындар",
       "key": "lecture-9",
       "depth": 1,
-      "page": 58
+      "page": 65
     },
     {
       "title": "Дәріс 10. Сөздіктер",
       "key": "lecture-10",
       "depth": 1,
-      "page": 64
+      "page": 71
     },
     {
       "title": "Дәріс 11. Объектіге бағытталған бағдарламалауға кіріспе",
       "key": "lecture-11",
       "depth": 1,
-      "page": 68
+      "page": 75
     },
     {
       "title": "Дәріс 12. Модульдер",
       "key": "lecture-12",
       "depth": 1,
-      "page": 74
+      "page": 81
     },
     {
       "title": "Дәріс 13. Mathlab тәрізді және өзге кітапханаларды пайдалану",
       "key": "lecture-13",
       "depth": 1,
-      "page": 80
+      "page": 87
     },
     {
       "title": "Дәріс 14. Қателерді талдау: throwExceptions",
       "key": "lecture-14",
       "depth": 1,
-      "page": 91
+      "page": 98
     },
     {
       "title": "Дәріс 15. Ерекше жағдайларды өңдеу және бағдарламаның тұрақтылығы",
       "key": "lecture-15",
       "depth": 1,
-      "page": 98
+      "page": 105
     },
     {
       "title": "Практикалық бөлім",
       "key": "practice",
       "depth": 0,
-      "page": 101
+      "page": 108
     },
     {
       "title": "Зертханалық жұмыс №1",
       "key": "lab-1",
       "depth": 1,
-      "page": 103
+      "page": 111
     },
     {
       "title": "Зертханалық жұмыс №2",
       "key": "lab-2",
       "depth": 1,
-      "page": 108
+      "page": 116
     },
     {
       "title": "Зертханалық жұмыс №3",
       "key": "lab-3",
       "depth": 1,
-      "page": 110
+      "page": 118
     },
     {
       "title": "Зертханалық жұмыс №4",
       "key": "lab-4",
       "depth": 1,
-      "page": 114
+      "page": 122
     },
     {
       "title": "Зертханалық жұмыс №5-6",
       "key": "lab-5-6",
       "depth": 1,
-      "page": 120
+      "page": 128
     },
     {
       "title": "Зертханалық жұмыс №7",
       "key": "lab-7",
       "depth": 1,
-      "page": 127
+      "page": 135
     },
     {
       "title": "Зертханалық жұмыс №8",
       "key": "lab-8",
       "depth": 1,
-      "page": 134
+      "page": 142
     },
     {
       "title": "Зертханалық жұмыс №9",
       "key": "lab-9",
       "depth": 1,
-      "page": 139
+      "page": 147
     },
     {
       "title": "Зертханалық жұмыс №10",
       "key": "lab-10",
       "depth": 1,
-      "page": 146
+      "page": 154
     },
     {
       "title": "Зертханалық жұмыс №11",
       "key": "lab-11",
       "depth": 1,
-      "page": 150
+      "page": 158
     },
     {
       "title": "Зертханалық жұмыс №12",
       "key": "lab-12",
       "depth": 1,
-      "page": 153
+      "page": 161
     },
     {
       "title": "Зертханалық жұмыс №13",
       "key": "lab-13",
       "depth": 1,
-      "page": 170
+      "page": 178
     },
     {
       "title": "Зертханалық жұмыс №14",
       "key": "lab-14",
       "depth": 1,
-      "page": 175
+      "page": 183
     },
     {
       "title": "Зертханалық жұмыс №15",
       "key": "lab-15",
       "depth": 1,
-      "page": 181
+      "page": 189
     },
     {
-      "title": "Білімді тексеру материалдары",
+      "title": "Білім алушының өзіндік жұмысы",
+      "key": "independent",
+      "depth": 0,
+      "page": 194
+    },
+    {
+      "title": "3.1. Тақырыптар бойынша өзіндік жұмыс тапсырмалары",
+      "key": "independent-topics",
+      "depth": 1,
+      "page": 195
+    },
+    {
+      "title": "3.2. Жеке бағдарламалық есептер",
+      "key": "independent-problems",
+      "depth": 1,
+      "page": 197
+    },
+    {
+      "title": "3.3. Шағын жұмыс (жоба) тақырыптары",
+      "key": "independent-projects",
+      "depth": 1,
+      "page": 199
+    },
+    {
+      "title": "3.4. Жұмысты рәсімдеу және қорғау талаптары",
+      "key": "independent-defense",
+      "depth": 1,
+      "page": 201
+    },
+    {
+      "title": "Өзін-өзі тексеру тесттері",
       "key": "assessment",
       "depth": 0,
-      "page": 186
+      "page": 202
     },
     {
       "title": "1–10. Java тілі және бағдарламалау ортасы",
       "key": "test-group-1",
       "depth": 1,
-      "page": 187
+      "page": 203
     },
     {
       "title": "11–20. Мәліметтер типтері және айнымалылар",
       "key": "test-group-2",
       "depth": 1,
-      "page": 190
+      "page": 206
     },
     {
       "title": "21–30. Мәліметтерді енгізу және шығару",
       "key": "test-group-3",
       "depth": 1,
-      "page": 193
+      "page": 209
     },
     {
       "title": "31–40. Операторлар және математикалық есептеулер",
       "key": "test-group-4",
       "depth": 1,
-      "page": 196
+      "page": 212
     },
     {
       "title": "41–50. Шартты операторлар",
       "key": "test-group-5",
       "depth": 1,
-      "page": 199
+      "page": 215
     },
     {
       "title": "51–60. Циклдік операторлар",
       "key": "test-group-6",
       "depth": 1,
-      "page": 202
+      "page": 218
     },
     {
       "title": "61–70. Массивтер және рекурсия",
       "key": "test-group-7",
       "depth": 1,
-      "page": 205
+      "page": 221
     },
     {
       "title": "71–80. Әдістер, тізімдер, жиындар және сөздіктер",
       "key": "test-group-8",
       "depth": 1,
-      "page": 208
+      "page": 224
     },
     {
       "title": "81–90. Объектіге бағытталған бағдарламалау",
       "key": "test-group-9",
       "depth": 1,
-      "page": 211
+      "page": 227
     },
     {
       "title": "91–100. Пакеттер, кітапханалар және ерекшеліктерді өңдеу",
       "key": "test-group-10",
       "depth": 1,
-      "page": 214
+      "page": 230
     },
     {
       "title": "Тест тапсырмаларының жауап кілті",
       "key": "answer-key",
       "depth": 1,
-      "page": 217
+      "page": 233
     },
     {
       "title": "Глоссарий",
       "key": "glossary",
       "depth": 0,
-      "page": 218
+      "page": 234
     },
     {
       "title": "Қорытынды",
       "key": "conclusion",
       "depth": 0,
-      "page": 223
+      "page": 240
     },
     {
-      "title": "Пайдаланылған әдебиеттер тізімі",
+      "title": "Пайдаланылған және ұсынылатын әдебиеттер",
       "key": "references",
       "depth": 0,
-      "page": 225
+      "page": 242
     }
   ],
   "videos": [
@@ -1781,6 +1835,108 @@
     },
     {
       "page": 229,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 230,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 231,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 232,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 233,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 234,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 235,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 236,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 237,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 238,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 239,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 240,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 241,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 242,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 243,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 244,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 245,
+      "kind": "page",
+      "width": 480,
+      "height": 680
+    },
+    {
+      "page": 246,
       "kind": "page",
       "width": 480,
       "height": 680

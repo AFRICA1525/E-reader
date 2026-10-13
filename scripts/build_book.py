@@ -26,8 +26,9 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'output/pdf'; TMP = ROOT/'tmp/pdfs'
 OUT.mkdir(parents=True,exist_ok=True); (TMP/'figures').mkdir(parents=True,exist_ok=True)
 SOURCE = next(ROOT.glob('*.pdf'))
-NEW = ROOT/'NewPages'
-REVISION = '20261008-cover-final'
+NEW = ROOT/'NewPages'/'NewAsset1'
+NEW2 = ROOT/'NewPages'/'NewAsset2'
+REVISION = '20261013-assets2'
 
 def document_paragraphs(name):
     return [p.text.strip() for p in Document(NEW/name).paragraphs if p.text.strip()]
@@ -36,6 +37,11 @@ front = document_paragraphs('Бастапқы беті 1-3.docx')
 FOREWORD = front[front.index('АЛҒЫ СӨЗ')+1:front.index('МАЗМҰНЫ')]
 CONCLUSION = document_paragraphs('ҚОРЫТЫНДЫ.docx')[1:]
 REFERENCES = document_paragraphs('ПАЙДАЛАНЫЛҒАН ӘДЕБИЕТТЕР.docx')[1:]
+update_document=Document(NEW2/'Электрондық оқу құралы.docx')
+UPDATE_PARAGRAPHS=[p.text.strip() for p in update_document.paragraphs]
+REFERENCES=[text for text in UPDATE_PARAGRAPHS[380:] if text]
+GLOSSARY=dict((row.cells[0].text.strip(),row.cells[1].text.strip()) for row in update_document.tables[3].rows[1:])
+
 test_document = Document(NEW/'Тест тапсырмалар.docx')
 TEST_GROUPS = []
 for p in test_document.paragraphs:
@@ -103,7 +109,7 @@ class Cover(Flowable):
     def __init__(self): super().__init__(); self.width=CW; self.height=540
     def draw(self):
         c=self.canv
-        c.drawImage(str(NEW/'Обновлённая обложка учебника по Java.png'),-M,-84,width=W,height=H)
+        c.drawImage(str(NEW2/'Казахский учебник по программированию Java.png'),-M,-84,width=W,height=H)
 
 class Heading(Paragraph):
     def __init__(self,title,key,depth=0,url=None,kicker=None):
@@ -352,21 +358,33 @@ for n in lectures:SOURCE_STATS['lectureChars'][n]=sum(map(len,lectures[n]))
 for n in labs:SOURCE_STATS['labChars'][n]=sum(map(len,labs[n]))
 
 story.append(Cover())
-section('Алғы сөз','foreword',kicker='01 / АЛҒЫ СӨЗ')
-for text in FOREWORD:
-    addp(text,'small' if text.startswith('Құрастырушы:') else 'body')
-section('Оқу нәтижелері','outcomes',kicker='04 / БІЛІМ МЕН ДАҒДЫ')
-addp('Пәнді меңгерген студент:')
-for i,s in enumerate(OUTCOMES,1):addp(f'{i:02d}. {s}')
+section('Электрондық оқу құралы','about',kicker='JAVA / 2026')
+for text in UPDATE_PARAGRAPHS[2:14]:
+    if text:addp(text)
 section('Мазмұны','contents',kicker='05 / КІТАП КАРТАСЫ')
 addp('Бөлім немесе тақырып атауын басып, қажетті бетке өтіңіз.','small')
 toc=TableOfContents();toc.levelStyles=[
  ParagraphStyle('toc0',fontName='SansBold',fontSize=9.8,leading=14,textColor=INK,spaceBefore=10,leftIndent=0,rightIndent=26),
  ParagraphStyle('toc1',fontName='Sans',fontSize=9.1,leading=13,textColor=INK,spaceBefore=5,leftIndent=13,rightIndent=26)]
 toc.dotsMinLevel=0;story.append(toc)
-section('Теориялық бөлім','theory',kicker='06 / ДӘРІСТЕР')
-addp('Негізгі бағдарламалау ұғымдарынан объекттер мен ерекше жағдайларды өңдеуге дейінгі 15 тақырып.')
-addp('Тақырып атауы мен видеосабақ карточкасы сыртқы видеоға апарады. Кітаптың мазмұны дәрістің бастапқы бетіне апарады.','note')
+def updated_paragraphs(start,end):
+    for text in UPDATE_PARAGRAPHS[start:end]:
+        if text:addp(text)
+
+section('Кіріспе','foreword',kicker='КІРІСПЕ')
+updated_paragraphs(61,66)
+section('Оқу құралының мақсаты мен міндеттері','purpose',1,kicker='КІРІСПЕ / МАҚСАТ')
+updated_paragraphs(68,76)
+section('Күтілетін оқу нәтижелері','outcomes',1,kicker='КІРІСПЕ / НӘТИЖЕЛЕР')
+updated_paragraphs(78,86)
+section('Электрондық оқу құралын пайдалану нұсқаулығы','guide',1,kicker='КІРІСПЕ / НҰСҚАУЛЫҚ')
+updated_paragraphs(88,91)
+section('Бағдарламалау ортасын орнату және баптау','setup',kicker='JAVA / JDK')
+updated_paragraphs(93,102)
+code('\n'.join(UPDATE_PARAGRAPHS[103:110]))
+updated_paragraphs(111,112)
+section('Теориялық бөлім','theory',kicker='1 / ДӘРІСТЕР')
+updated_paragraphs(125,134)
 for n in range(1,15):
     section(f'Дәріс {n}. {TITLES[n-1]}',f'lecture-{n}',1,'https://www.youtube.com/watch?v='+VIDEO_MAP[n-1],f'ДӘРІС {n:02d} / ТЕОРИЯ')
     video(n)
@@ -382,14 +400,35 @@ for kind,s in LECTURE15:
     elif kind=='code':code(s)
     else:addp(s)
 section('Практикалық бөлім','practice',kicker='07 / ЗЕРТХАНАЛЫҚ ЖҰМЫСТАР')
-addp('Әр жұмыс үшін теориялық дайындық, алгоритм, бағдарлама және орындалу нәтижесі ұсынылады. Бастапқы жұмыс нөмірлері сақталған; №5–6 біріккен жұмыс ретінде беріледі.')
-addp('Бастапқы практикалық бөлімде C/C++ және JavaScript тілдерінің салыстырмалы мысалдары бар. Білімді тексеруге арналған тест тапсырмалары келесі бөлімде берілген.','small')
+updated_paragraphs(187,194)
 body_text('\n'.join(preamble))
 for number,text in labs.items():
     section(f'Зертханалық жұмыс №{number}',f'lab-{number}',1,kicker=f'ПРАКТИКА / №{number}')
     body_text('\n'.join(text))
-section('Білімді тексеру материалдары','assessment',kicker='08 / БІЛІМДІ ТЕКСЕРУ')
-addp('100 тест тапсырмасы · 10 тақырыптық блок · жауап кілті','note')
+def updated_table(number,widths):
+    rows=[[para(cell.text,'cell') for cell in row.cells] for row in update_document.tables[number].rows]
+    table=Table(rows,colWidths=widths,repeatRows=1)
+    table.setStyle(TableStyle([('GRID',(0,0),(-1,-1),.4,LINE),('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e7ece3')),('VALIGN',(0,0),(-1,-1),'TOP'),('TOPPADDING',(0,0),(-1,-1),7),('BOTTOMPADDING',(0,0),(-1,-1),7)]))
+    story.append(table)
+
+section('Білім алушының өзіндік жұмысы','independent',kicker='3 / ӨЗІНДІК ЖҰМЫС')
+updated_paragraphs(260,261)
+section('3.1. Тақырыптар бойынша өзіндік жұмыс тапсырмалары','independent-topics',1,kicker='ӨЗІНДІК ЖҰМЫС')
+updated_paragraphs(264,265)
+updated_table(0,[25,115,CW-140])
+section('3.2. Жеке бағдарламалық есептер','independent-problems',1,kicker='ӨЗІНДІК ЖҰМЫС')
+updated_paragraphs(273,281)
+updated_table(1,[45,CW-45])
+section('3.3. Шағын жұмыс (жоба) тақырыптары','independent-projects',1,kicker='ӨЗІНДІК ЖҰМЫС')
+updated_paragraphs(283,284)
+updated_table(2,[25,140,CW-165])
+story.append(KeepTogether([para(text) for text in UPDATE_PARAGRAPHS[287:295] if text]))
+section('3.4. Жұмысты рәсімдеу және қорғау талаптары','independent-defense',1,kicker='ӨЗІНДІК ЖҰМЫС')
+updated_paragraphs(297,305)
+section('Өзін-өзі тексеру тесттері','assessment',kicker='08 / БІЛІМДІ ТЕКСЕРУ')
+addp('Интерактивті тест: 15 тақырып · 75 сұрақ · әр тақырыпта 5 сұрақ.','note')
+story.append(Paragraph('<link href="https://africa1525.github.io/E-reader/self-check.html" color="#183e3c"><b>Өзін-өзі тексеру тестін ашу</b></link>',styles['body']))
+addp('Төменде басып шығаруға арналған 100 тест тапсырмасы және жауап кілті сақталған.','small')
 addp('Әр тапсырмада бір дұрыс жауапты таңдаңыз. Алдымен өз бетіңізше орындаңыз, содан кейін бөлім соңындағы жауап кілтімен салыстырыңыз.')
 for group_index,group in enumerate(TEST_GROUPS,1):
     section(group['title'],f'test-group-{group_index}',1,kicker='ТЕСТ ТАПСЫРМАЛАРЫ')
@@ -412,7 +451,7 @@ for term,definition in GLOSSARY.items():
     story.append(KeepTogether([para(term,'h'),para(definition)]))
 section('Қорытынды','conclusion',kicker='10 / НЕГІЗГІ ТҰЖЫРЫМДАР')
 for text in CONCLUSION:addp(text)
-section('Пайдаланылған әдебиеттер тізімі','references',kicker='11 / ДЕРЕККӨЗДЕР')
+section('Пайдаланылған және ұсынылатын әдебиеттер','references',kicker='11 / ДЕРЕККӨЗДЕР')
 for i,text in enumerate(REFERENCES,1):
     # Drop only a pasted, truncated filename after an otherwise complete entry.
     text=re.sub(r'\s+JAVA тілінде.*$','',text)
@@ -444,7 +483,7 @@ doc.multiBuild(story,maxPasses=6)
 final=PdfReader(OUT/'java-reader.pdf')
 profile={'version':3,'revision':REVISION,'edition':2026,'title':'Java тілінде объектіге бағытталған бағдарламалау','pdf':'./output/pdf/java-reader.pdf','width':W,'height':H,'pageCount':len(final.pages),'contents':doc.contents,'videos':[{'lecture':n,'id':vid,'url':'https://www.youtube.com/watch?v='+vid,**VIDEOS[vid]} for n,vid in enumerate(VIDEO_MAP,1)],'pages':[{'page':i+1,'kind':'page','width':W,'height':H} for i in range(len(final.pages))]}
 (OUT/'book.json').write_text(json.dumps(profile,ensure_ascii=False,indent=2),encoding='utf-8')
-(OUT/'assessment.json').write_text(json.dumps({'version':3,'type':'multiple-choice','source':'NewPages/Тест тапсырмалар.docx','groups':TEST_GROUPS,'answerKey':ANSWER_KEY},ensure_ascii=False,indent=2),encoding='utf-8')
+(OUT/'assessment.json').write_text(json.dumps({'version':3,'type':'multiple-choice','source':'NewPages/NewAsset1/Тест тапсырмалар.docx','groups':TEST_GROUPS,'answerKey':ANSWER_KEY},ensure_ascii=False,indent=2),encoding='utf-8')
 (TMP/'source-audit.json').write_text(json.dumps(SOURCE_STATS,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps({'pages':len(final.pages),'contents':len(doc.contents),'sourceFigures':SOURCE_STATS['images'],'sourceTables':SOURCE_STATS['tables'],'lectures':len(lectures)+1,'labs':list(labs)},ensure_ascii=False),flush=True)
 

@@ -1,4 +1,4 @@
-import {initReadingTools} from './reading-tools.js?v=20261009-tools';
+import {initReadingTools} from './reading-tools.js?v=20261013-assets2';
 import * as pdfjs from './vendor/pdf.mjs';
 import {makeCurl,paintCurl,finishCurl,prepareCurl} from './curl.js';
 import {attachPageLinks} from './pdf-links.js';
@@ -174,10 +174,11 @@ function setContents(open) {
 }
 function buildContents() {
   const content = $('sideContent'); content.replaceChildren();
+  const quizLink=document.createElement('a');quizLink.href='./self-check.html';quizLink.className='self-check-link';quizLink.textContent='Өзін-өзі тексеру · 75 сұрақ';content.append(quizLink);
   let groupBody = null;
   for (const item of profile.contents) {
     if (item.depth === 0) groupBody = null;
-    if (['theory','practice','assessment'].includes(item.key)) {
+    if (['theory','practice','independent','assessment'].includes(item.key)) {
       const group = document.createElement('details'); group.className = 'contents-group'; group.open = true;
       const summary = document.createElement('summary'); summary.textContent = item.title;
       groupBody = document.createElement('div'); group.append(summary, groupBody); content.append(group);
@@ -252,7 +253,7 @@ async function toggleZoom(point) {
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
   try {
-    const response = await fetch(new URL('./output/pdf/book.json?v=20261009-tools', import.meta.url), {cache:'no-store'});
+    const response = await fetch(new URL('./output/pdf/book.json?v=20261013-assets2', import.meta.url), {cache:'no-store'});
     if (!response.ok) throw Error('Кітап мазмұны табылмады.');
     profile = await response.json();
     const pdfURL = new URL(profile.pdf, import.meta.url);
@@ -293,7 +294,7 @@ $('fullscreen').onclick = async () => {
 document.addEventListener('keydown', e => {
   if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
   if (e.key === 'Tab' && phoneQuery.matches && !$('sidebar').hidden) {
-    const buttons = [...$('sidebar').querySelectorAll('button,input,summary')].filter(element => element.getClientRects().length);
+    const buttons = [...$('sidebar').querySelectorAll('button,input,summary,a')].filter(element => element.getClientRects().length);
     const first = buttons[0], last = buttons.at(-1);
     if (e.shiftKey && e.target === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && e.target === last) { e.preventDefault(); first.focus(); }
