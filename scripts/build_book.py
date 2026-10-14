@@ -28,7 +28,8 @@ OUT.mkdir(parents=True,exist_ok=True); (TMP/'figures').mkdir(parents=True,exist_
 SOURCE = next(ROOT.glob('*.pdf'))
 NEW = ROOT/'NewPages'/'NewAsset1'
 NEW2 = ROOT/'NewPages'/'NewAsset2'
-REVISION = '20261013-assets2'
+REVISION = '20261015-form-tnr12'
+GOOGLE_FORM=json.loads((OUT/'google-form.json').read_text(encoding='utf-8'))
 
 def document_paragraphs(name):
     return [p.text.strip() for p in Document(NEW/name).paragraphs if p.text.strip()]
@@ -80,6 +81,15 @@ styles = {
  'cell':ParagraphStyle('cell',fontName='Sans',fontSize=8.1,leading=11.3,textColor=INK,spaceAfter=0),
 }
 
+for name,style in styles.items():
+    style.fontName='BodyBold' if name in ['h','title','eyebrow'] else 'Body'
+    style.fontSize=12
+    style.leading=12
+    style.spaceBefore=0
+    style.spaceAfter=0
+    style.alignment=TA_JUSTIFY
+    style.borderPadding=0
+
 VIDEO_META = json.loads((TMP/'video-metadata.json').read_text(encoding='utf-8-sig'))
 VIDEOS={v['id']:v for v in VIDEO_META if 'title' in v}
 VIDEOS.update({
@@ -130,9 +140,9 @@ class BookDoc(BaseDocTemplate):
         c.saveState(); c.setFillColor(PAPER); c.rect(0,0,W,H,fill=1,stroke=0)
         if doc.page>1:
             c.setStrokeColor(LINE); c.setLineWidth(.5); c.line(M,H-34,W-M,H-34); c.line(M,34,W-M,34)
-            c.setFillColor(MUTED); c.setFont('Sans',6.6); c.drawString(M,H-25,'JAVA  /  ЭЛЕКТРОНДЫ ОҚУ ҚҰРАЛЫ')
-            c.setFillColor(GOLD); c.setFont('SansBold',7); c.drawRightString(W-M,H-25,'2026')
-            c.setFillColor(MUTED); c.setFont('Sans',7); c.drawString(M,21,'Найзағараева А. А.')
+            c.setFillColor(MUTED); c.setFont('Body',12); c.drawString(M,H-25,'JAVA  /  ЭЛЕКТРОНДЫ ОҚУ ҚҰРАЛЫ')
+            c.setFillColor(GOLD); c.setFont('BodyBold',12); c.drawRightString(W-M,H-25,'2026')
+            c.setFillColor(MUTED); c.setFont('Body',12); c.drawString(M,21,'Найзағараева А. А.')
             c.setFillColor(INK); c.drawRightString(W-M,21,f'{doc.page:03d}')
         c.restoreState()
     def afterFlowable(self,f):
@@ -364,8 +374,8 @@ for text in UPDATE_PARAGRAPHS[2:14]:
 section('Мазмұны','contents',kicker='05 / КІТАП КАРТАСЫ')
 addp('Бөлім немесе тақырып атауын басып, қажетті бетке өтіңіз.','small')
 toc=TableOfContents();toc.levelStyles=[
- ParagraphStyle('toc0',fontName='SansBold',fontSize=9.8,leading=14,textColor=INK,spaceBefore=10,leftIndent=0,rightIndent=26),
- ParagraphStyle('toc1',fontName='Sans',fontSize=9.1,leading=13,textColor=INK,spaceBefore=5,leftIndent=13,rightIndent=26)]
+ ParagraphStyle('toc0',fontName='BodyBold',fontSize=12,leading=12,textColor=INK,spaceBefore=0,leftIndent=0,rightIndent=26),
+ ParagraphStyle('toc1',fontName='Body',fontSize=12,leading=12,textColor=INK,spaceBefore=0,leftIndent=13,rightIndent=26)]
 toc.dotsMinLevel=0;story.append(toc)
 def updated_paragraphs(start,end):
     for text in UPDATE_PARAGRAPHS[start:end]:
@@ -427,25 +437,8 @@ section('3.4. Жұмысты рәсімдеу және қорғау талапт
 updated_paragraphs(297,305)
 section('Өзін-өзі тексеру тесттері','assessment',kicker='08 / БІЛІМДІ ТЕКСЕРУ')
 addp('Интерактивті тест: 15 тақырып · 75 сұрақ · әр тақырыпта 5 сұрақ.','note')
-story.append(Paragraph('<link href="https://africa1525.github.io/E-reader/self-check.html" color="#183e3c"><b>Өзін-өзі тексеру тестін ашу</b></link>',styles['body']))
-addp('Төменде басып шығаруға арналған 100 тест тапсырмасы және жауап кілті сақталған.','small')
-addp('Әр тапсырмада бір дұрыс жауапты таңдаңыз. Алдымен өз бетіңізше орындаңыз, содан кейін бөлім соңындағы жауап кілтімен салыстырыңыз.')
-for group_index,group in enumerate(TEST_GROUPS,1):
-    section(group['title'],f'test-group-{group_index}',1,kicker='ТЕСТ ТАПСЫРМАЛАРЫ')
-    for q in group['questions']:
-        items=[para(f"{q['number']}. {q['question']}",'question')]
-        items.extend(para(option,'question') for option in q['options'])
-        items.append(Spacer(1,9))
-        story.append(KeepTogether(items))
-section('Тест тапсырмаларының жауап кілті','answer-key',1,kicker='ЖАУАП КІЛТІ')
-rows=[['№','Жауап']*5]
-for i in range(1,21):
-    row=[]
-    for offset in [0,20,40,60,80]:row.extend([str(i+offset),ANSWER_KEY[i+offset]])
-    rows.append(row)
-table=Table([[para(c,'cell') for c in row] for row in rows],colWidths=[CW/10]*10,repeatRows=1)
-table.setStyle(TableStyle([('GRID',(0,0),(-1,-1),.4,LINE),('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e7ece3')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('ALIGN',(0,0),(-1,-1),'CENTER'),('TOPPADDING',(0,0),(-1,-1),4),('BOTTOMPADDING',(0,0),(-1,-1),4)]))
-story.append(table)
+story.append(Paragraph('<link href="https://docs.google.com/forms/d/e/1FAIpQLSeeLIbT8kQIuV_kqBQnrIw3PYcS_Imr3mnPSovj2-Bync6gPg/viewform" color="#183e3c"><b>Өзін-өзі тексеру тестін ашу</b></link>',styles['body']))
+addp('Тестті Google Forms арқылы орындаңыз. Әр сұрақта бір дұрыс жауапты таңдаңыз. Нәтиже форманың соңында көрсетіледі.')
 section('Глоссарий','glossary',kicker='09 / ТЕРМИНДЕР')
 for term,definition in GLOSSARY.items():
     story.append(KeepTogether([para(term,'h'),para(definition)]))
@@ -470,7 +463,7 @@ for label,url in [
  ('MathWorks. MATLAB documentation','https://www.mathworks.com/help/matlab/'),
  ('КарТУ. Объектіге бағытталған Java бағдарламалау. Қазақша ашық видеокурс','https://edu.kstu.kz/course/view.php?id=3204')
 ]:
-    story.append(Paragraph(f'<link href="{escape(url)}" color="#183e3c">{escape(label)}</link><br/><font size="8" color="#72817b">{escape(url)}</font>',styles['body']))
+    story.append(Paragraph(f'<link href="{escape(url)}" color="#183e3c">{escape(label)}</link><br/><font size="12" color="#72817b">{escape(url)}</font>',styles['body']))
 sub('Қолданылған қазақша видеосабақтар')
 for vid in dict.fromkeys(VIDEO_MAP+['l5Sm2Ps6AOg']):
     v=VIDEOS[vid];used=[str(i+1) for i,key in enumerate(VIDEO_MAP) if key==vid]
@@ -481,9 +474,9 @@ doc=BookDoc(OUT/'java-reader.pdf')
 print('Typesetting the book...',flush=True)
 doc.multiBuild(story,maxPasses=6)
 final=PdfReader(OUT/'java-reader.pdf')
-profile={'version':3,'revision':REVISION,'edition':2026,'title':'Java тілінде объектіге бағытталған бағдарламалау','pdf':'./output/pdf/java-reader.pdf','width':W,'height':H,'pageCount':len(final.pages),'contents':doc.contents,'videos':[{'lecture':n,'id':vid,'url':'https://www.youtube.com/watch?v='+vid,**VIDEOS[vid]} for n,vid in enumerate(VIDEO_MAP,1)],'pages':[{'page':i+1,'kind':'page','width':W,'height':H} for i in range(len(final.pages))]}
+profile={'version':3,'revision':REVISION,'edition':2026,'title':'Java тілінде объектіге бағытталған бағдарламалау','pdf':'./output/pdf/java-reader.pdf','width':W,'height':H,'selfCheckUrl':GOOGLE_FORM['url'],'pageCount':len(final.pages),'contents':doc.contents,'videos':[{'lecture':n,'id':vid,'url':'https://www.youtube.com/watch?v='+vid,**VIDEOS[vid]} for n,vid in enumerate(VIDEO_MAP,1)],'pages':[{'page':i+1,'kind':'page','width':W,'height':H} for i in range(len(final.pages))]}
 (OUT/'book.json').write_text(json.dumps(profile,ensure_ascii=False,indent=2),encoding='utf-8')
-(OUT/'assessment.json').write_text(json.dumps({'version':3,'type':'multiple-choice','source':'NewPages/NewAsset1/Тест тапсырмалар.docx','groups':TEST_GROUPS,'answerKey':ANSWER_KEY},ensure_ascii=False,indent=2),encoding='utf-8')
+(OUT/'assessment.json').write_text(json.dumps({'version':4,'type':'google-form',**GOOGLE_FORM},ensure_ascii=False,indent=2),encoding='utf-8')
 (TMP/'source-audit.json').write_text(json.dumps(SOURCE_STATS,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps({'pages':len(final.pages),'contents':len(doc.contents),'sourceFigures':SOURCE_STATS['images'],'sourceTables':SOURCE_STATS['tables'],'lectures':len(lectures)+1,'labs':list(labs)},ensure_ascii=False),flush=True)
 

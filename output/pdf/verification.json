@@ -1,11 +1,10 @@
 {
-  "pages": 246,
-  "portraitPages": 246,
-  "testQuestions": 100,
-  "testGroups": 10,
-  "answerKeyEntries": 100,
-  "linkAnnotations": 188,
-  "videoLinks": 61,
-  "newPageTopics": 43,
+  "pages": 152,
+  "portraitPages": 152,
+  "printedTestQuestions": 0,
+  "googleFormQuestions": 75,
+  "linkAnnotations": 156,
+  "videoLinks": 50,
+  "newPageTopics": 33,
   "issues": []
 }

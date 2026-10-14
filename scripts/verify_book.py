@@ -13,20 +13,17 @@ issues=[];by_key={e['key']:e for e in profile['contents']}
 assert not any(key.startswith('appendi') for key in by_key)
 assert profile['contents'][-1]['key']=='references'
 assert len(reader.pages)==profile['pageCount']
-assert assessment['type']=='multiple-choice'
-assert len(assessment['groups'])==10
-questions=[q for group in assessment['groups'] for q in group['questions']]
-assert [q['number'] for q in questions]==list(range(1,101))
-assert all(len(q['options'])==4 for q in questions)
-assert all([option[:2] for option in q['options']]==['A)','B)','C)','D)'] for q in questions)
-assert set(assessment['answerKey'])==set(map(str,range(1,101)))
-assert all(value in 'ABCD' for value in assessment['answerKey'].values())
+assert assessment['type']=='google-form' and assessment['questionCount']==75
+assert profile['selfCheckUrl']==assessment['url']
+assert not any(key.startswith('test-group-') or key=='answer-key' for key in by_key)
 assert all(float(p.mediabox.width)==480 and float(p.mediabox.height)==680 for p in reader.pages)
 assert all(not int(p.get('/Rotate',0)) for p in reader.pages)
 links=0;video_links=0;boundaries=[]
 for i,p in enumerate(doc.pages):
     if i==0:continue
     chars=[c for c in p.chars if c['top']>36 and c['bottom']<645 and c['text'].strip()]
+    font_errors=[c for c in chars if abs(c['size']-12)>.01 or 'TimesNewRoman' not in c['fontname']]
+    if font_errors:issues.append({'page':i+1,'kind':'font','sample':[(c['text'],c['fontname'],c['size']) for c in font_errors[:3]]})
     bad=[c for c in chars if c['x0']<43 or c['x1']>437 or c['top']<48 or c['bottom']>635]
     if bad:issues.append({'page':i+1,'kind':'bounds','sample':''.join(c['text'] for c in bad)[:160]})
     text=p.extract_text() or ''
@@ -60,8 +57,8 @@ for start in range(0,len(pdfium),per_sheet):
         x=j%cols*cell_w+(cell_w-im.width)//2;y=j//cols*cell_h+8
         sheet.paste(im,(x,y));draw.text((x,y+im.height+4),str(start+j+1),fill='#183e3c')
     sheet.save(tmp/f'contact-{start//per_sheet+1}.png')
-selected=[1,2,by_key['contents']['page'],by_key['lecture-1']['page'],by_key['lecture-7']['page'],by_key['lecture-15']['page'],by_key['lab-15']['page'],by_key['test-group-1']['page'],by_key['test-group-10']['page'],by_key['answer-key']['page'],by_key['conclusion']['page'],by_key['references']['page'],by_key['glossary']['page']]
+selected=[1,2,by_key['contents']['page'],by_key['lecture-1']['page'],by_key['lecture-7']['page'],by_key['lecture-15']['page'],by_key['lab-15']['page'],by_key['assessment']['page'],by_key['conclusion']['page'],by_key['references']['page'],by_key['glossary']['page']]
 for page in selected:pdfium[page-1].render(scale=1.5).to_pil().save(tmp/f'page-{page}.png')
-result={'pages':len(pdfium),'portraitPages':len(pdfium),'testQuestions':100,'testGroups':10,'answerKeyEntries':100,'linkAnnotations':links,'videoLinks':video_links,'newPageTopics':len(boundaries),'issues':issues}
+result={'pages':len(pdfium),'portraitPages':len(pdfium),'printedTestQuestions':0,'googleFormQuestions':75,'linkAnnotations':links,'videoLinks':video_links,'newPageTopics':len(boundaries),'issues':issues}
 (out/'verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps(result,ensure_ascii=False,indent=2));print('Rendered sample pages:',selected)

@@ -1,20 +1,10 @@
 import fs from 'node:fs';
-import vm from 'node:vm';
 import assert from 'node:assert/strict';
-const html=fs.readFileSync(new URL('../self-check.html',import.meta.url),'utf8');
-const data=JSON.parse(fs.readFileSync(new URL('../output/pdf/self-check.json',import.meta.url),'utf8'));
-assert.equal(data.length,15);assert.ok(data.every(g=>g.questions.length===5));
-assert.ok(data.flatMap(g=>g.questions).every(q=>q.options.length===4&&new Set(q.options).size===4&&q.answer>=0&&q.answer<4));
-assert.ok(!/<script[^>]+src=/.test(html),'quiz must work offline');
-const elements=new Map();let chosen=0;
-const el=id=>{if(!elements.has(id))elements.set(id,{value:'0',textContent:'',hidden:false,children:[],append(...children){this.children.push(...children)},replaceChildren(){this.children=[]}});return elements.get(id);};
-const context=vm.createContext({Math,Number,document:{getElementById:el,createElement:()=>el(`new-${elements.size}`),createTextNode:text=>({textContent:text}),querySelector:()=>({value:chosen}),querySelectorAll:()=>[]}});
-vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],context);
-const answer=()=>el('quiz').onsubmit({preventDefault(){}});
-for(let i=0;i<5;i++){chosen=0;answer();answer();if(i<4)el('next').onclick();}
-assert.match(el('feedback').textContent,/5 \/ 5/,'correct answers count once');
-el('next').onclick();assert.match(el('progress').textContent,/Дұрыс жауаптар: 0/);
-chosen=1;answer();assert.match(el('feedback').textContent,/Қате/);
-el('topic').value='14';el('topic').onchange();assert.equal(el('question').textContent,data[14].questions[0].question);
-assert.match(el('progress').textContent,/Сұрақ 1 \/ 5/);
-console.log('PASS: 75 questions, offline quiz, correct/wrong answers, duplicate submit, restart and topic switching.');
+const read=name=>JSON.parse(fs.readFileSync(new URL('../output/pdf/'+name,import.meta.url),'utf8'));
+const form=read('google-form.json'),profile=read('book.json'),assessment=read('assessment.json');
+assert.equal(form.questionCount,75);assert.equal(form.topicCount,15);assert.equal(form.maxScore,75);
+assert.match(form.url,/^https:\/\/docs\.google\.com\/forms\/d\/e\/[^/]+\/viewform$/);
+assert.equal(profile.selfCheckUrl,form.url);assert.equal(assessment.type,'google-form');
+assert.ok(!profile.contents.some(e=>e.key.startsWith('test-group-')||e.key==='answer-key'));
+assert.ok(fs.readFileSync(new URL('../self-check.html',import.meta.url),'utf8').includes(form.url));
+console.log('PASS: Google Form URL, 75 questions, removed printed groups and legacy redirect.');

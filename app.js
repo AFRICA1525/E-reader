@@ -1,4 +1,4 @@
-import {initReadingTools} from './reading-tools.js?v=20261013-assets2';
+import {initReadingTools} from './reading-tools.js?v=20261015-form-tnr12';
 import * as pdfjs from './vendor/pdf.mjs';
 import {makeCurl,paintCurl,finishCurl,prepareCurl} from './curl.js';
 import {attachPageLinks} from './pdf-links.js';
@@ -174,7 +174,7 @@ function setContents(open) {
 }
 function buildContents() {
   const content = $('sideContent'); content.replaceChildren();
-  const quizLink=document.createElement('a');quizLink.href='./self-check.html';quizLink.className='self-check-link';quizLink.textContent='Өзін-өзі тексеру · 75 сұрақ';content.append(quizLink);
+  const quizLink=document.createElement('a');quizLink.href=profile.selfCheckUrl;quizLink.target='_blank';quizLink.rel='noopener noreferrer';quizLink.className='self-check-link';quizLink.textContent='Өзін-өзі тексеру · 75 сұрақ';content.append(quizLink);
   let groupBody = null;
   for (const item of profile.contents) {
     if (item.depth === 0) groupBody = null;
@@ -253,7 +253,7 @@ async function toggleZoom(point) {
 async function loadBook() {
   $('error').hidden = true; $('loading').hidden = false;
   try {
-    const response = await fetch(new URL('./output/pdf/book.json?v=20261013-assets2', import.meta.url), {cache:'no-store'});
+    const response = await fetch(new URL('./output/pdf/book.json?v=20261015-form-tnr12', import.meta.url), {cache:'no-store'});
     if (!response.ok) throw Error('Кітап мазмұны табылмады.');
     profile = await response.json();
     const pdfURL = new URL(profile.pdf, import.meta.url);
